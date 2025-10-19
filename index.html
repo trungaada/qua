@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>💝 Quà Tặng 20/10 💐</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <style>
@@ -19,7 +20,7 @@
       position: relative;
     }
 
-    /* Hiệu ứng ánh sáng bokeh/glitter nhẹ nhàng hơn */
+    /* Hiệu ứng ánh sáng bokeh/glitter */
     .bokeh {
       position: absolute;
       top: 0;
@@ -34,10 +35,9 @@
     .circle {
       position: absolute;
       border-radius: 50%;
-      /* Màu nhạt, dịu hơn */
       background: rgba(255, 255, 255, 0.4); 
       box-shadow: 0 0 10px rgba(255, 182, 193, 0.6);
-      animation: float 15s infinite ease-in-out; /* Chậm hơn */
+      animation: float 15s infinite ease-in-out; 
     }
 
     @keyframes float {
@@ -54,10 +54,9 @@
     }
 
     h1 {
-      /* Font sang trọng */
       font-family: 'Playfair Display', serif; 
-      font-size: 55px;
-      color: #b80050; /* Đỏ đô/Hồng đậm */
+      font-size: 55px; /* PC */
+      color: #b80050;
       margin-bottom: 30px;
       text-shadow: 1px 1px 3px rgba(255, 105, 180, 0.4);
       animation: textPulse 3s infinite ease-in-out;
@@ -70,11 +69,10 @@
 
     button {
       padding: 18px 45px;
-      font-size: 24px;
+      font-size: 24px; /* PC */
       font-family: 'Playfair Display', serif;
       border: 2px solid #ff80a0;
       border-radius: 10px;
-      /* Gradient tinh tế hơn */
       background: linear-gradient(145deg, #ffc0cb, #ff80a0);
       color: white;
       cursor: pointer;
@@ -92,7 +90,6 @@
       background: linear-gradient(145deg, #ff80a0, #ffc0cb);
     }
 
-    /* Hiệu ứng lấp lánh (sparkle) tinh tế hơn */
     button::before, button::after {
       content: '';
       position: absolute;
@@ -126,14 +123,15 @@
       filter: drop-shadow(0 0 2px rgba(255, 105, 180, 0.5));
     }
 
-    @keyframes fall {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-    }
-
-    @keyframes floatUp {
-      0% { transform: translateY(0) scale(0.8); opacity: 1; }
-      100% { transform: translateY(-100vh) scale(1.5) rotate(-30deg); opacity: 0; }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 30px; /* Nhỏ hơn cho điện thoại */
+        padding: 0 15px;
+      }
+      button {
+        padding: 12px 30px;
+        font-size: 18px; /* Nhỏ hơn cho điện thoại */
+      }
     }
   </style>
 </head>
@@ -142,11 +140,11 @@
 
   <div class="container">
     <h1>💐 Món quà nhỏ gửi tặng Ngày Phụ nữ Việt Nam 20/10 💝</h1>
-    <button onclick="location.href='qua20-10.html'">🎁 Mở Hộp Quà Đi Các Bạn 💖</button>
+    <button onclick="location.href='qua20-10.html'">🎁 Mở Hộp Quà Yêu Thương 💖</button>
   </div>
 
   <script>
-    // Tạo hiệu ứng ánh sáng bokeh nhẹ
+    // Script giữ nguyên
     const bokeh = document.getElementById('bokeh');
     for (let i = 0; i < 15; i++) {
       const c = document.createElement('div');
@@ -183,5 +181,4 @@
     }, 3000);
   </script>
 </body>
-
 </html>
