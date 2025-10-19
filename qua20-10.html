@@ -6,6 +6,7 @@
 <title>💖 Món quà 20/10 💐</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
 <style>
+/* ... (Giữ nguyên phần CSS từ body đến @media) ... */
   body {
     margin: 0;
     padding: 0;
@@ -79,6 +80,7 @@
     position: relative;
     overflow: hidden;
     will-change: transform, opacity;
+    /* Giữ nguyên background-image */
     background-image: radial-gradient(#ffebee 10%, transparent 10%),
                       radial-gradient(#ffcdd2 10%, transparent 10%);
     background-size: 20px 20px;
@@ -95,6 +97,7 @@
     z-index:1;
   }
 
+  /* Tối ưu hóa: Giảm thời gian hoạt ảnh lật thiệp từ 1.5s xuống 1.2s */
   @keyframes cardFlipIn {
     0% {transform:scale(0.8) rotateX(90deg); opacity:0;}
     100% {transform:scale(1) rotateX(0deg); opacity:1;}
@@ -102,7 +105,7 @@
 
   #card.show {
     display: block;
-    animation: cardFlipIn 1.5s ease-out forwards;
+    animation: cardFlipIn 1.2s ease-out forwards; 
   }
 
   #card h1 {
@@ -170,7 +173,8 @@
     position: fixed;
     top: -10px;
     pointer-events:none;
-    animation: fall 8s linear forwards;
+    /* Giảm thời gian animation từ 8s xuống 6s để heart biến mất nhanh hơn */
+    animation: fall 6s linear forwards; 
     z-index:1;
     opacity:0.8;
   }
@@ -246,6 +250,9 @@ const card=document.getElementById('card');
 const note=document.getElementById('note');
 const lines=document.querySelectorAll('.line');
 
+// Xác định thiết bị di động
+const isMobile = window.innerWidth <= 600;
+
 // Thay ** thành <strong>
 lines.forEach(line=>{
   line.innerHTML=line.textContent.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
@@ -256,27 +263,29 @@ giftBox.addEventListener('click',()=>{
   giftBox.src="2.png";
   giftBox.style.cursor="default";
 
-  // Hiệu ứng Confetti
-  for(let i=0;i<5;i++){
+  // Tối ưu hóa Confetti: Giảm số lượng trên mobile
+  const numConfetti = isMobile ? 2 : 5;
+  for(let i=0;i<numConfetti;i++){
     const conf=document.createElement("div");
     conf.classList.add("confetti");
     conf.style.left=Math.random()*100+"vw";
     conf.style.backgroundColor=["#ff4da6","#ffb6c1","#ffd700","#66ccff","#ff66ff"][Math.floor(Math.random()*5)];
-    conf.style.width=Math.random()*5+3+"px";
-    conf.style.height=Math.random()*5+3+"px";
-    conf.style.animationDuration=2+Math.random()*1+"s";
+    // Giảm kích thước và thời gian animation trên mobile
+    conf.style.width=isMobile ? Math.random()*3+2+"px" : Math.random()*5+3+"px";
+    conf.style.height=isMobile ? Math.random()*3+2+"px" : Math.random()*5+3+"px";
+    conf.style.animationDuration=isMobile ? 2+Math.random()*0.5+"s" : 2+Math.random()*1+"s";
     document.body.appendChild(conf);
     setTimeout(()=>conf.remove(),2500);
   }
 
   giftBox.classList.add("fade-out"); // Bắt đầu làm mờ (0.8s)
 
-  // Sửa: Giảm thời gian chờ xuống 800ms để khớp với animation fadeOut của hộp quà
+  // Giữ nguyên logic chuyển màn hình (800ms)
   setTimeout(()=>{
     giftBox.style.display="none";
-    card.classList.add("show"); // Thiệp bắt đầu xuất hiện (animation 1.2s)
+    card.classList.add("show");
     
-    // Sửa: Thêm độ trễ ban đầu 500ms trước khi dòng đầu tiên xuất hiện
+    // Giữ nguyên logic hiện từng dòng
     const initialLineDelay = 500;
     lines.forEach((line,i)=>{ 
       setTimeout(()=>line.classList.add('show'), initialLineDelay + i*400); 
@@ -284,18 +293,33 @@ giftBox.addEventListener('click',()=>{
   },800);
 });
 
-// Tim rơi nền - giảm số lượng
-setInterval(()=>{
-  const heart=document.createElement("div");
-  heart.textContent="💖";
-  heart.classList.add("falling-heart");
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=Math.random()*6+12+"px";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),6000);
-},2500);
+// Tối ưu hóa Tim rơi nền: Giảm tần suất hoặc tắt hẳn trên mobile
+if (!isMobile) {
+    // Desktop: Giữ nguyên tốc độ 2.5s/heart
+    setInterval(()=>{
+        const heart=document.createElement("div");
+        heart.textContent="💖";
+        heart.classList.add("falling-heart");
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=Math.random()*6+12+"px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),6000);
+    },2500);
+} else {
+    // Mobile: Tăng thời gian chờ lên 5 giây (ít tạo phần tử mới hơn)
+    setInterval(()=>{
+        const heart=document.createElement("div");
+        heart.textContent="💖";
+        heart.classList.add("falling-heart");
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=Math.random()*4+10+"px"; // Tim nhỏ hơn
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),6000);
+    },5000); 
+}
 
-// Tim bay khi click
+
+// Tim bay khi click (Giữ nguyên, không quá nặng)
 document.addEventListener("click",e=>{
   const heart=document.createElement("div");
   heart.textContent="💗";
@@ -306,9 +330,6 @@ document.addEventListener("click",e=>{
   setTimeout(()=>heart.remove(),1000);
 });
 </script>
-
-</body>
-</html>
 
 </body>
 </html>
