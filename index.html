@@ -20,7 +20,7 @@
       position: relative;
     }
 
-    /* Hiệu ứng ánh sáng bokeh/glitter */
+    /* Hiệu ứng ánh sáng bokeh/glitter nhẹ nhàng hơn */
     .bokeh {
       position: absolute;
       top: 0;
@@ -35,15 +35,16 @@
     .circle {
       position: absolute;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3); /* Giảm độ trong suốt */
-      box-shadow: 0 0 8px rgba(255, 182, 193, 0.4); /* Giảm bóng */
-      animation: float 20s infinite ease-in-out; /* Chậm hơn nữa */
+      /* Màu nhạt, dịu hơn */
+      background: rgba(255, 255, 255, 0.4); 
+      box-shadow: 0 0 10px rgba(255, 182, 193, 0.6);
+      animation: float 15s infinite ease-in-out; /* Chậm hơn */
     }
 
     @keyframes float {
-      0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
-      50% { transform: translate(50px, -50px) scale(1.1); opacity: 0.8; }
-      100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+      0% { transform: translateY(0) scale(1); opacity: 0.5; }
+      50% { transform: translateY(-50px) scale(1.1); opacity: 0.8; }
+      100% { transform: translateY(0) scale(1); opacity: 0.5; }
     }
 
     /* Nội dung chính */
@@ -51,12 +52,14 @@
       text-align: center;
       position: relative;
       z-index: 5;
+      padding: 20px; /* Thêm padding tổng thể cho màn hình nhỏ */
     }
 
     h1 {
+      /* Font sang trọng */
       font-family: 'Playfair Display', serif; 
-      font-size: 55px; /* PC */
-      color: #b80050;
+      font-size: 55px; /* Kích thước PC */
+      color: #b80050; /* Đỏ đô/Hồng đậm */
       margin-bottom: 30px;
       text-shadow: 1px 1px 3px rgba(255, 105, 180, 0.4);
       animation: textPulse 3s infinite ease-in-out;
@@ -69,10 +72,11 @@
 
     button {
       padding: 18px 45px;
-      font-size: 24px;
+      font-size: 24px; /* Kích thước PC */
       font-family: 'Playfair Display', serif;
       border: 2px solid #ff80a0;
       border-radius: 10px;
+      /* Gradient tinh tế hơn */
       background: linear-gradient(145deg, #ffc0cb, #ff80a0);
       color: white;
       cursor: pointer;
@@ -90,33 +94,65 @@
       background: linear-gradient(145deg, #ff80a0, #ffc0cb);
     }
 
+    /* Hiệu ứng lấp lánh (sparkle) tinh tế hơn */
+    button::before, button::after {
+      content: '';
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+    }
+
+    button::before {
+      width: 10px; height: 10px;
+      top: 10px; left: 15%;
+      animation: sparkle 2s infinite;
+    }
+    button::after {
+      width: 8px; height: 8px;
+      bottom: 10px; right: 10%;
+      animation: sparkle 2s infinite reverse;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.5); opacity: 1; }
+    }
+
     /* Tim rơi & hoa bay */
-    .effect-item {
+    .heart, .flower {
       position: fixed;
       pointer-events: none;
       z-index: 2;
       animation-timing-function: linear;
-      filter: drop-shadow(0 0 1px rgba(255, 105, 180, 0.3)); /* Giảm bóng */
+      filter: drop-shadow(0 0 2px rgba(255, 105, 180, 0.5));
     }
 
     @keyframes fall {
-      0% { transform: translateY(0vh) rotate(0deg); opacity: 1; }
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
       100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
 
     @keyframes floatUp {
-      0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+      0% { transform: translateY(0) scale(0.8); opacity: 1; }
       100% { transform: translateY(-100vh) scale(1.5) rotate(-30deg); opacity: 0; }
     }
 
+    /* MEDIA QUERY cho màn hình điện thoại (<= 600px) */
     @media (max-width: 600px) {
       h1 {
-        font-size: 30px; 
-        padding: 0 15px;
+        font-size: 30px; /* Cỡ chữ PC là 55px, giảm xuống 30px cho di động */
+        margin-bottom: 15px; /* Giảm khoảng cách dưới */
+        line-height: 1.3; 
       }
       button {
-        padding: 12px 30px;
-        font-size: 18px; 
+        padding: 12px 25px; /* Giảm padding */
+        font-size: 18px; /* Cỡ chữ PC là 24px, giảm xuống 18px cho di động */
+        width: 80%; /* Chiếm phần lớn chiều rộng */
+        max-width: 300px;
+      }
+      .container {
+          padding: 10px; /* Giảm padding tổng thể */
       }
     }
   </style>
@@ -126,46 +162,49 @@
 
   <div class="container">
     <h1>💐 Món quà nhỏ gửi tặng Ngày Phụ nữ Việt Nam 20/10 💝</h1>
-    <button onclick="location.href='qua20-10.html'">🎁 Mở Hộp Quà Yêu Thương 💖</button>
+    <button onclick="location.href='qua20-10.html'">🎁 Mở Hộp Quà Đê Các Bạn 💖</button>
   </div>
 
   <script>
-    // Tối ưu hóa hiệu ứng Bokeh (Giảm số lượng)
+    // Tạo hiệu ứng ánh sáng bokeh nhẹ
     const bokeh = document.getElementById('bokeh');
-    for (let i = 0; i < 8; i++) { // Giảm từ 15 xuống 8
+    for (let i = 0; i < 15; i++) {
       const c = document.createElement('div');
       c.classList.add('circle');
-      c.style.width = c.style.height = Math.random() * 60 + 30 + 'px'; // Giảm kích thước
+      c.style.width = c.style.height = Math.random() * 80 + 40 + 'px';
       c.style.left = Math.random() * 100 + 'vw';
       c.style.top = Math.random() * 100 + 'vh';
-      c.style.animationDuration = 15 + Math.random() * 10 + 's'; 
-      c.style.animationDelay = Math.random() * 10 + 's';
+      c.style.animationDuration = 10 + Math.random() * 10 + 's';
       bokeh.appendChild(c);
     }
 
-    // Tim rơi (Giảm số lượng và tần suất)
+    // Tim rơi (ĐÃ TĂNG TỐC ĐỘ và TẦN SUẤT)
     setInterval(() => {
       const heart = document.createElement('div');
-      heart.classList.add('effect-item');
+      heart.classList.add('heart');
       heart.textContent = '💖';
       heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.fontSize = Math.random() * 10 + 15 + 'px'; // Giảm kích thước
-      heart.style.animation = `fall ${8 + Math.random() * 4}s linear forwards`; // Chậm hơn
+      heart.style.fontSize = Math.random() * 15 + 20 + 'px';
+      // Tốc độ: 3s - 6s (nhanh hơn 6s - 10s)
+      const duration = 3 + Math.random() * 3;
+      heart.style.animation = `fall ${duration}s linear forwards`;
       document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 12000);
-    }, 1500); // Tăng thời gian chờ từ 800ms lên 1500ms
+      setTimeout(() => heart.remove(), duration * 1000 + 500);
+    }, 400); // Tần suất: 400ms (nhanh hơn 800ms)
 
-    // Hoa bay lên (Giảm số lượng và tần suất)
+    // Hoa bay lên (ĐÃ TĂNG TỐC ĐỘ và TẦN SUẤT)
     setInterval(() => {
       const flower = document.createElement('div');
-      flower.classList.add('effect-item');
+      flower.classList.add('flower');
       flower.textContent = ['🌸','🌹','🌷'][Math.floor(Math.random()*3)];
       flower.style.left = Math.random() * 100 + 'vw';
-      flower.style.fontSize = Math.random() * 15 + 15 + 'px'; // Giảm kích thước
-      flower.style.animation = `floatUp ${10 + Math.random() * 5}s linear forwards`; // Chậm hơn
+      flower.style.fontSize = Math.random() * 20 + 20 + 'px';
+      // Tốc độ: 4s - 7s (nhanh hơn 7s - 11s)
+      const duration = 4 + Math.random() * 3;
+      flower.style.animation = `floatUp ${duration}s linear forwards`;
       document.body.appendChild(flower);
-      setTimeout(() => flower.remove(), 15000);
-    }, 5000); // Tăng thời gian chờ từ 3000ms lên 5000ms
+      setTimeout(() => flower.remove(), duration * 1000 + 500);
+    }, 1500); // Tần suất: 1500ms (nhanh hơn 3000ms)
   </script>
 </body>
 </html>
