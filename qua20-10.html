@@ -14,6 +14,7 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      /* Nền hồng phấn nhẹ nhàng, tinh tế */
       background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
       font-family: 'Quicksand', sans-serif;
       text-align: center;
@@ -40,10 +41,11 @@
     /* Hộp quà */
     #gift-box {
       width: 300px; 
-      max-width: 80vw; /* Đảm bảo không quá rộng trên mobile */
+      max-width: 80vw;
       height: auto;
       cursor: pointer;
-      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      /* Dùng transform cho hiệu ứng nhẹ nhàng hơn */
+      transition: transform 0.5s ease;
       animation: pulse 2s infinite ease-in-out;
       z-index: 5;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -70,13 +72,14 @@
       background: #fffcf8; 
       border-radius: 25px;
       box-shadow: 0 0 40px rgba(255, 105, 180, 0.6);
-      padding: 50px; /* PC */
+      padding: 50px;
       width: 85%;
       max-width: 650px;
       text-align: center;
       opacity: 0;
       transform: scale(0.8);
-      transition: opacity 1.5s ease, transform 1.5s ease;
+      /* Sử dụng cubic-bezier để mượt hơn */
+      transition: opacity 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       z-index: 10;
       position: relative;
     }
@@ -92,17 +95,15 @@
       to { box-shadow: 0 0 55px rgba(255, 105, 180, 0.8); }
     }
 
-    /* Tiêu đề */
+    /* Tiêu đề & Nội dung */
     #card h1 {
       color: #b80050;
       font-family:'Playfair Display', serif;
       font-size: 45px;
       margin-top: 10px;
       margin-bottom: 20px;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     }
 
-    /* Nội dung lời chúc */
     #card p {
       font-size: 22px; 
       color: #333;
@@ -130,26 +131,60 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* MEDIA QUERIES - ĐIỀU CHỈNH CHO THIẾT BỊ DI ĐỘNG */
+    /* Tim rơi nền (Tối ưu hóa) */
+    .falling-heart {
+      position: fixed;
+      top: 0;
+      pointer-events: none;
+      /* Dùng transform để hoạt động mượt hơn */
+      animation: fall-bg 8s linear forwards; 
+      z-index: 1;
+      opacity: 0.8;
+      filter: drop-shadow(0 0 1px #ff69b4);
+    }
+    @keyframes fall-bg {
+      0% { transform: translateY(0vh) rotate(0deg); opacity: 0.8; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Tim bay khi click (Tối ưu hóa) */
+    .click-heart {
+      position: fixed;
+      /* Dùng transform */
+      animation: floatUp-click 1.5s ease-out forwards;
+      font-size: 28px;
+      pointer-events: none;
+      filter: drop-shadow(0 0 5px #ff69b4);
+    }
+    @keyframes floatUp-click {
+      0% { transform: translate(0, 0) scale(1); opacity: 1; }
+      100% { transform: translate(0, -100px) scale(2); opacity: 0; }
+    }
+
+    /* Pháo giấy */
+    .confetti {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background-color: pink;
+      opacity: 0.9;
+      animation: confetti-fall 4s ease-out forwards;
+      z-index: 20;
+      border-radius: 50%;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* MEDIA QUERIES */
     @media (max-width: 600px) {
-      #note {
-        font-size: 16px;
-      }
-      #card {
-        padding: 30px 20px; /* Giảm padding trên mobile */
-        max-width: 95%;
-      }
-      #card h1 {
-        font-size: 32px; /* Giảm kích thước tiêu đề */
-      }
-      #card p {
-        font-size: 16px; /* Giảm kích thước lời chúc */
-        line-height: 1.6;
-      }
-      .signature {
-        font-size: 20px; /* Giảm kích thước chữ ký */
-        margin-top: 20px;
-      }
+      #note { font-size: 16px; }
+      #card { padding: 30px 20px; max-width: 95%; }
+      #card h1 { font-size: 32px; }
+      #card p { font-size: 16px; line-height: 1.6; }
+      .signature { font-size: 20px; margin-top: 20px; }
     }
   </style>
 </head>
@@ -176,7 +211,6 @@
   </div>
 
   <script>
-    // Script giữ nguyên
     const giftBox = document.getElementById('gift-box');
     const card = document.getElementById('card');
     const note = document.getElementById('note');
@@ -185,11 +219,13 @@
     giftBox.addEventListener('click', () => {
       note.style.display = "none";
       
+      // Giả định có ảnh hộp quà đã mở (ví dụ: 2.png)
       giftBox.src = "2.png"; 
       giftBox.style.animation = "none";
       giftBox.style.cursor = "default";
 
-      for (let i = 0; i < 20; i++) {
+      // Pháo giấy (Giảm số lượng, dùng biến thể random nhẹ nhàng hơn)
+      for (let i = 0; i < 15; i++) { // Giảm từ 20 xuống 15
         const conf = document.createElement("div");
         conf.classList.add("confetti");
         conf.style.left = Math.random() * 100 + "vw";
@@ -201,37 +237,40 @@
         setTimeout(() => conf.remove(), 4000);
       }
 
+      // Hộp mờ dần, chuyển sang thiệp
       giftBox.classList.add("fade-out");
 
       setTimeout(() => {
         giftBox.style.display = "none";
         card.classList.add("show");
 
+        // Hiển thị từng dòng chậm hơn
         lines.forEach((line, i) => {
           setTimeout(() => line.classList.add('show'), i * 1200);
         });
       }, 1200);
     });
 
-    // Tim rơi nền
+    // Tim rơi nền (Tối ưu hóa: Giảm số lượng và tần suất)
     setInterval(() => {
       const heart = document.createElement("div");
       heart.innerHTML = "💖";
       heart.classList.add("falling-heart");
       heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = Math.random() * 15 + 15 + "px";
-      heart.style.opacity = Math.random() * 0.5 + 0.5;
+      heart.style.fontSize = Math.random() * 10 + 10 + "px"; // Giảm kích thước
+      heart.style.opacity = Math.random() * 0.4 + 0.4; // Giảm opacity
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 8000);
-    }, 600);
+    }, 1000); // Tăng thời gian chờ từ 600ms lên 1000ms
 
-    // Tim bay khi click
+    // Tim bay khi click (Đã dùng transform)
     document.addEventListener("click", e => {
       const heart = document.createElement("div");
       heart.textContent = "💗";
       heart.className = "click-heart";
-      heart.style.left = e.clientX + "px";
-      heart.style.top = e.clientY + "px";
+      // Sử dụng pageX/Y thay vì clientX/Y để chính xác hơn
+      heart.style.left = e.pageX + "px";
+      heart.style.top = e.pageY + "px";
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 1500);
     });
