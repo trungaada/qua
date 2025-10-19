@@ -340,13 +340,13 @@ body.fade-in {
   <div class="card-main-icon">❤️</div>
   <h1>🌷💖 Chúc Mừng 20/10 💐🌸</h1>
   <p>
-    <span class="line">Thân gửi [name]</span>
-    <span class="line">Tặng những bông hoa rực rỡ nhất cho những người phụ nữ tuyệt vời nhất! 💐🌷</span>
-    <span class="line">🌹 Nhân ngày 20/10, tập thể nam sinh xin gửi những lời chúc tươi đẹp và tốt lành nhất tới [name]</span>
-    <span class="line">🌸 Chúc [name] luôn vui vẻ, khỏe mạnh, mãi mãi trẻ trung 🌸</span>
-    <span class="line">✨ Chúc các bạn nữ - những bông hoa rực rỡ của 12A11, luôn xinh đẹp, học tập thành công, và thật hạnh phúc trong mọi khoảnh khắc.</span>
-    <span class="line">💕 Cảm ơn các bạn đã tạo nên những kỷ niệm đáng nhớ và tô thêm màu rực rỡ cho quãng thời gian cấp 3 này.</span>
-    <span class="line">💐 Chúc [name] và các bạn có một ngày 20/10 thật ý nghĩa và ngập tràn niềm vui bên những người thân yêu!</span>
+    <span class="line">Thân gửi **[name]** yêu quý!</span>
+    <span class="line">Tặng những bông hoa rực rỡ nhất cho người phụ nữ tuyệt vời nhất! 💐🌷</span>
+    <span class="line">🌹 Nhân ngày 20/10, chúng tớ xin gửi những lời chúc tươi đẹp và tốt lành nhất tới **[name]**.</span>
+    <span class="line">🌸 Chúc **[name]** luôn vui vẻ, khỏe mạnh, mãi mãi trẻ trung và xinh đẹp. 🌸</span>
+    <span class="line">✨ Chúc **[name]** gặt hái được thật nhiều thành công trong học tập và luôn thật hạnh phúc trong mọi khoảnh khắc của cuộc sống.</span>
+    <span class="line">💕 Cảm ơn **[name]** đã tạo nên những kỷ niệm đáng nhớ và tô thêm màu rực rỡ cho quãng thời gian cấp 3 này.</span>
+    <span class="line">💐 Chúc **[name]** có một ngày 20/10 thật ý nghĩa và ngập tràn niềm vui bên những người thân yêu!</span>
     <span class="line">Trân trọng và yêu quý!</span>
   </p>
   <div class="signature">Tập thể nam sinh 12A11 gửi tặng</div>
@@ -397,8 +397,12 @@ startBtn.addEventListener('click', () => {
     }
 
     // 1. Thay [name] trong các dòng chúc ngay lập tức
+    // Lưu ý: Thay thế cả dấu **[name]** để đảm bảo tên được in đậm và thay thế đúng
     lines.forEach(line=>{
-        line.innerHTML = line.innerHTML.replace(/\[name\]/g, `<strong>${name}</strong>`); // SỬA: BOLD TÊN NGƯỜI NHẬN
+        let content = line.innerHTML;
+        content = content.replace(/\*\*\[name\]\*\*/g, `<strong>${name}</strong>`); // Thay thế **[name]**
+        content = content.replace(/\[name\]/g, `<strong>${name}</strong>`); // Thay thế [name] (cho các dòng cũ, nếu sót)
+        line.innerHTML = content;
     });
 
     // 2. BẮT ĐẦU HIỆU ỨNG FADE-OUT CHO INPUT CONTAINER
