@@ -69,12 +69,9 @@
     /* Thiệp */
     #card {
       display: none;
-      /* Background giấy trắng ngà, tinh tế */
       background: #fffcf8; 
       border-radius: 25px;
-      /* Thêm khung viền mỏng giống thiệp */
-      border: 4px solid #ffb6c1; /* Viền hồng nhạt */
-      /* Box shadow glow sang trọng và thêm shadow bên trong để tạo lớp */
+      border: 4px solid #ffb6c1; 
       box-shadow: 0 0 40px rgba(255, 105, 180, 0.6),
                   inset 0 0 10px rgba(255, 182, 193, 0.4); 
       padding: 50px; /* Kích thước PC */
@@ -92,7 +89,6 @@
       display: block;
       opacity: 1;
       transform: scale(1);
-      /* Ánh sáng glow mềm mại hơn */
       animation: glow 3s ease-in-out infinite alternate;
     }
 
@@ -101,43 +97,69 @@
       to { box-shadow: 0 0 55px rgba(255, 105, 180, 0.8), inset 0 0 15px rgba(255, 105, 180, 0.6); }
     }
 
-    /* Tiêu đề */
+    /* Tiêu đề (ĐÃ THÊM TEXT SHADOW) */
     #card h1 {
       color: #b80050;
       font-family:'Playfair Display', serif;
-      font-size: 45px; /* Kích thước PC */
+      font-size: 45px; 
       margin-top: 10px;
       margin-bottom: 20px;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      font-weight: 700;
+      /* ĐÃ THÊM: Đổ bóng chữ nhẹ nhàng */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+      animation: titlePulse 2.5s infinite ease-in-out; /* Hiệu ứng nhấp nháy nhẹ */
+    }
+    @keyframes titlePulse {
+      0% { transform: scale(1); text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); }
+      50% { transform: scale(1.01); text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); }
+      100% { transform: scale(1); text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); }
     }
 
-    /* Nội dung lời chúc (ĐIỀU CHỈNH CĂN GIỮA VÀ KÍCH THƯỚC) */
+    /* Icon trên cùng (ĐÃ THÊM HIỆU ỨNG GLOW) */
+    .top-icons {
+        margin-bottom: 10px;
+        font-size: 45px;
+    }
+    .top-icons span {
+        filter: drop-shadow(0 0 5px rgba(255, 182, 193, 0.8)); /* Hiệu ứng glow cho icon */
+        animation: iconGlow 2s infinite alternate; /* Hiệu ứng nhấp nháy glow */
+    }
+    @keyframes iconGlow {
+        from { filter: drop-shadow(0 0 5px rgba(255, 182, 193, 0.8)); }
+        to { filter: drop-shadow(0 0 10px rgba(255, 105, 180, 1)); }
+    }
+    
+    /* Nội dung lời chúc */
     #card p {
-      font-size: 18px; /* Giữ kích thước nhỏ gọn */
+      font-size: 18px; 
       color: #333;
-      line-height: 1.5; /* Giảm line-height cho căn chỉnh tốt hơn */
+      line-height: 1.5; 
       font-family: 'Quicksand', sans-serif;
-      /* ĐIỀU CHỈNH: Căn giữa nội dung */
+      font-weight: 500;
       text-align: center; 
-      width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng thẻ */
+      width: 100%; 
       margin: 0;
     }
     
+    /* Chữ ký (ĐÃ THÊM TEXT SHADOW) */
     .signature {
         margin-top: 30px;
         font-family:'Playfair Display', serif;
-        font-size: 28px; /* Kích thước PC */
+        font-size: 28px; 
         color: #b80050;
+        font-weight: 700;
+        text-align: center;
+        /* ĐÃ THÊM: Đổ bóng chữ nhẹ nhàng */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15); 
     }
 
-    /* Hiệu ứng từng dòng (ĐIỀU CHỈNH ĐỂ CĂN GIỮA) */
+    /* Hiệu ứng từng dòng (Hiệu ứng khi xuất hiện) */
     .line {
       opacity: 0;
       transform: translateY(15px);
-      /* Chuyển sang inline-block để căn giữa và mỗi dòng là một khối */
       display: inline-block; 
-      margin-bottom: 15px; /* TĂNG: Khoảng cách giữa các đoạn chúc */
-      padding: 0 10px; /* Thêm padding ngang để nội dung không sát lề quá */
+      margin-bottom: 15px; 
+      padding: 0 10px; 
     }
     .line.show {
       animation: lineUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
@@ -211,7 +233,7 @@
             margin-bottom: 15px;
         }
         #card p {
-            font-size: 14px; /* Giảm font nội dung */
+            font-size: 14px; 
             line-height: 1.5;
         }
         .signature {
@@ -219,7 +241,7 @@
             margin-top: 20px;
         }
         .line {
-            margin-bottom: 10px; /* Giảm khoảng cách dòng trên di động */
+            margin-bottom: 10px; 
         }
     }
   </style>
@@ -230,7 +252,11 @@
   <div id="note">💬 Nhấn vào hộp quà để mở nhé 💖</div>
 
   <div id="card">
-    <div style="font-size:60px; margin-bottom:15px; color:#ff69b4;">🌷🎉</div>
+    <div class="top-icons">
+        <span style="color: #ff69b4;">🌷</span>
+        <span style="color: #ffd700;">🎉</span>
+    </div>
+    
     <h1>💖 Chúc Mừng 20/10 💐</h1>
     
     <p>
@@ -282,7 +308,7 @@
 
         // Hiển thị từng dòng chậm hơn
         lines.forEach((line, i) => {
-          setTimeout(() => line.classList.add('show'), i * 800); // Giảm thời gian trễ để hiển thị nhanh hơn
+          setTimeout(() => line.classList.add('show'), i * 800); 
         });
       }, 1200);
     });
