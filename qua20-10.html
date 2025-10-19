@@ -6,8 +6,7 @@
 <title>💖 Món quà 20/10 💐</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
 <style>
-/* ... (Giữ nguyên phần CSS từ body đến @media) ... */
-  body {
+body {
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -21,23 +20,82 @@
     overflow: hidden;
     position: relative;
     perspective: 1000px;
-  }
+}
 
-  #note {
+/* --- INPUT & BUTTON --- */
+#name-input-container {
+    margin-bottom: 20px;
+    display: flex; /* Giữ Flexbox */
+    flex-direction: column; /* Đặt các mục theo chiều dọc */
+    align-items: center; /* Căn giữa theo chiều ngang */
+    justify-content: center;
+}
+
+/* Container cho Input và Icon để giữ chúng cùng hàng */
+#input-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; /* Thêm khoảng cách giữa input và button */
+}
+
+/* Thêm kiểu cho input và button cho đẹp hơn */
+#name-input-container input, #name-input-container button {
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 2px solid #ff69b4;
+    font-size: 16px;
+    font-family: 'Quicksand', sans-serif;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+#name-input-container input {
+    width: 200px;
+}
+
+#name-input-container button {
+    background-color: #ff69b4;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    width: 200px; /* Đặt width cố định cho nút để cân đối với input */
+}
+
+#name-input-container button:hover {
+    background-color: #ff1493;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+
+/* CSS cho Icon mới */
+#name-icon {
+    font-size: 24px;
+    margin-right: 10px;
+    animation: subtlePulse 1.5s infinite alternate; /* Hiệu ứng nhấp nháy */
+    color: #b80050;
+}
+
+@keyframes subtlePulse {
+    from {transform: scale(1); opacity: 0.9;}
+    to {transform: scale(1.1); opacity: 1;}
+}
+/* Kết thúc CSS cho Icon mới */
+
+#note {
     color: #880e4f;
     font-size: 20px;
     font-weight: 700;
     margin-top: 25px;
     animation: glowText 2.5s ease-in-out infinite alternate;
     text-shadow: 0 0 6px rgba(255,182,193,0.7);
-  }
+}
 
-  @keyframes glowText {
+@keyframes glowText {
     from {opacity:0.7; transform:scale(1);}
     to {opacity:1; transform:scale(1.02);}
-  }
+}
 
-  #gift-box {
+#gift-box {
     width: 300px;
     cursor: pointer;
     transition: transform 0.5s ease, box-shadow 0.5s ease;
@@ -46,26 +104,28 @@
     box-shadow: 0 10px 15px rgba(0,0,0,0.2);
     border-radius: 10px;
     will-change: transform;
-  }
+    display: none; /* Ẩn ban đầu */
+}
 
-  #gift-box:hover {
+#gift-box:hover {
     transform: scale(1.05);
     box-shadow: 0 12px 25px rgba(255,105,180,0.5);
-  }
+}
 
-  @keyframes pulse {
+@keyframes pulse {
     0% {transform:scale(1);}
     50% {transform:scale(1.05);}
     100% {transform:scale(1);}
-  }
+}
 
-  .fade-out { animation: fadeOut 1s forwards; }
-  @keyframes fadeOut {
+.fade-out { animation: fadeOut 1s forwards; }
+@keyframes fadeOut {
     from {opacity:1; transform:scale(1);}
     to {opacity:0; transform:scale(0.7);}
-  }
+}
 
-  #card {
+/* --- CARD --- */
+#card {
     display: none;
     background: #fffcf8;
     border-radius: 25px;
@@ -80,14 +140,13 @@
     position: relative;
     overflow: hidden;
     will-change: transform, opacity;
-    /* Giữ nguyên background-image */
     background-image: radial-gradient(#ffebee 10%, transparent 10%),
                       radial-gradient(#ffcdd2 10%, transparent 10%);
     background-size: 20px 20px;
     background-position: 0 0, 10px 10px;
-  }
+}
 
-  #card::before {
+#card::before {
     content:'';
     position:absolute;
     top:20px; left:20px; right:20px; bottom:20px;
@@ -95,20 +154,19 @@
     border-radius:10px;
     pointer-events:none;
     z-index:1;
-  }
+}
 
-  /* Tối ưu hóa: Giảm thời gian hoạt ảnh lật thiệp từ 1.5s xuống 1.2s */
-  @keyframes cardFlipIn {
-    0% {transform:scale(0.8) rotateX(90deg); opacity:0;}
-    100% {transform:scale(1) rotateX(0deg); opacity:1;}
-  }
+@keyframes cardSlideIn {
+    0% {transform:translateY(30vh) scale(0.8); opacity:0;}
+    100% {transform:translateY(0) scale(1); opacity:1;}
+}
 
-  #card.show {
+#card.show {
     display: block;
-    animation: cardFlipIn 1.2s ease-out forwards; 
-  }
+    animation: cardSlideIn 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards; 
+}
 
-  #card h1 {
+#card h1 {
     color:#b80050;
     font-family:'Playfair Display', serif;
     font-size:45px;
@@ -116,15 +174,15 @@
     font-weight:700;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.2);
     animation: titlePulse 2.5s infinite ease-in-out;
-  }
+}
 
-  @keyframes titlePulse {
+@keyframes titlePulse {
     0% {transform:scale(1);}
     50% {transform:scale(1.01);}
     100% {transform:scale(1);}
-  }
+}
 
-  #card p {
+#card p {
     font-size:18px;
     color:#111;
     line-height:1.6;
@@ -135,14 +193,14 @@
     margin:0 auto;
     word-wrap: break-word;
     overflow-wrap: break-word;
-  }
+}
 
-  #card p strong {
+#card p strong {
     color:#ff3385;
     font-weight:700;
-  }
+}
 
-  .signature {
+.signature {
     margin-top:30px;
     font-family:'Playfair Display', serif;
     font-size:28px;
@@ -150,53 +208,73 @@
     font-weight:700;
     text-align:center;
     text-shadow:1px 1px 2px rgba(0,0,0,0.15);
-  }
+}
 
-  .line {
+.line {
     opacity:0;
     transform: translateY(15px);
     display:block;
     margin-bottom:12px;
     text-align:center;
-  }
+}
 
-  .line.show {
+.line.show {
     animation: lineUp 1s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
-  }
+}
 
-  @keyframes lineUp {
+@keyframes lineUp {
     to {opacity:1; transform:translateY(0);}
-  }
+}
 
-  /* Tim rơi */
-  .falling-heart {
+/* --- Decorations --- */
+.deco-flower {
+    position: absolute;
+    font-size: 25px;
+    color: #ff80ab;
+    z-index: 2;
+    opacity: 0;
+    animation: decoAppear 2s ease-out forwards;
+}
+
+@keyframes decoAppear {
+    0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.1) rotate(15deg); }
+    100% { opacity: 1; transform: scale(1) rotate(10deg); }
+}
+
+#deco-tl { top: 10px; left: 10px; animation-delay: 1.0s; }
+#deco-tr { top: 10px; right: 10px; animation-delay: 1.2s; }
+#deco-bl { bottom: 10px; left: 10px; animation-delay: 1.4s; }
+#deco-br { bottom: 10px; right: 10px; animation-delay: 1.6s; }
+
+/* --- Falling effects --- */
+.falling-heart {
     position: fixed;
     top: -10px;
     pointer-events:none;
-    /* Giảm thời gian animation từ 8s xuống 6s để heart biến mất nhanh hơn */
     animation: fall 6s linear forwards; 
     z-index:1;
     opacity:0.8;
-  }
+}
 
-  @keyframes fall {
+@keyframes fall {
     0% {transform:translateY(0) rotate(0deg); opacity:0.8;}
     100% {transform:translateY(110vh) rotate(360deg); opacity:0;}
-  }
+}
 
-  .click-heart {
+.click-heart {
     position: fixed;
     animation: floatUp 1.5s ease-out forwards;
     font-size:28px;
     pointer-events:none;
-  }
+}
 
-  @keyframes floatUp {
+@keyframes floatUp {
     0% {transform:translateY(0) scale(1); opacity:1;}
     100% {transform:translateY(-100px) scale(2); opacity:0;}
-  }
+}
 
-  .confetti {
+.confetti {
     position: fixed;
     width: 6px;
     height: 6px;
@@ -204,15 +282,15 @@
     opacity:0.9;
     animation: confetti-fall 3s ease-out forwards;
     z-index:20;
-  }
+}
 
-  @keyframes confetti-fall {
+@keyframes confetti-fall {
     0% {transform:translateY(0) rotate(0); opacity:1;}
     100% {transform:translateY(100vh) rotate(720deg); opacity:0;}
-  }
+}
 
-  /* Mobile optimizations */
-  @media(max-width:600px){
+/* --- Mobile optimizations --- */
+@media(max-width:600px){
     #card {border-radius:15px; border:8px solid #fce4ec; padding:25px 15px; width:95%; background-image:none;}
     #card::before {top:15px; left:15px; right:15px; bottom:15px;}
     #gift-box {width:250px;}
@@ -221,113 +299,148 @@
     #card p {font-size:14px; width:100%;}
     .signature {font-size:20px; margin-top:20px;}
     .line {margin-bottom:8px;}
-  }
+}
 </style>
 </head>
 <body>
+
+<div id="name-input-container">
+  <div id="input-wrapper">
+      <span id="name-icon"></span> 
+      <input type="text" id="recipient-name" placeholder="Nhập tên">
+  </div>
+  <button id="start-btn">🎁 Nhận quà</button>
+</div>
 
 <img id="gift-box" src="1.jpg" alt="Hộp quà">
 <div id="note">💬 Nhấn vào hộp quà để mở nhé 💖</div>
 
 <div id="card">
+  <div class="deco-flower" id="deco-tl">🌸</div>
+  <div class="deco-flower" id="deco-tr">🌸</div>
+  <div class="deco-flower" id="deco-bl">🌸</div>
+  <div class="deco-flower" id="deco-br">🌸</div>
+  
   <div class="card-main-icon">❤️</div>
-  <h1>💖 Chúc Mừng 20/10 💐</h1>
+  <h1>🌷💖 Chúc Mừng 20/10 💐🌸</h1>
   <p>
-    <span class="line">Thân gửi **Cô Mai** và các **bạn nữ 12A11**!</span>
-    <span class="line">🌹 Nhân ngày 20/10, tập thể nam sinh xin gửi những lời chúc **tươi đẹp** và **tốt lành nhất** tới những người phụ nữ **tuyệt vời** của lớp chúng ta.</span>
-    <span class="line">🌸 **Cô Mai** - Chúc Cô luôn **vui vẻ**, **khỏe mạnh**, mãi mãi **trẻ trung** và là người thắp lửa **niềm đam mê** cho chúng em.</span>
-    <span class="line">✨ Chúc các **bạn nữ** - những **bông hoa rực rỡ** của 12A11, luôn **xinh đẹp**, học tập **thành công**, và thật **hạnh phúc** trong mọi khoảnh khắc.</span>
-    <span class="line">💕 Cảm ơn các bạn đã tạo nên những **kỷ niệm đáng nhớ** và tô thêm màu **rực rỡ** cho quãng thời gian cấp 3 này.</span>
-    <span class="line">💐 Chúc Cô và các bạn có một ngày 20/10 thật **ý nghĩa** và **ngập tràn niềm vui** bên những người thân yêu!</span>
-    <span class="line">**Trân trọng và yêu quý!**</span>
+    <span class="line">Thân gửi **[name]**!</span>
+    <span class="line">🌹 Nhân ngày 20/10 - Ngày Phụ nữ Việt Nam, tập thể nam sinh 12A11 xin gửi lời chúc tốt đẹp nhất tới **[name]**!</span>
+    <span class="line">🌸 Chúc **[name]** luôn vui vẻ, khỏe mạnh, xinh đẹp và mãi mãi trẻ trung!</span>
+    <span class="line">✨ Chúc **[name]** luôn tự tin, học tập thành công và thật hạnh phúc trong mọi khoảnh khắc của cuộc sống.</span>
+    <span class="line">💕 Cảm ơn **[name]** đã là một phần tuyệt vời của tập thể 12A11, cùng nhau tạo nên những kỉ niệm đáng nhớ.</span>
+    <span class="line">💐 Chúc **[name]** có một ngày 20/10 thật ý nghĩa, ngập tràn niềm vui và nhận được nhiều món quà yêu thương!</span>
+    <span class="line">Trân trọng và yêu quý!</span>
   </p>
   <div class="signature">Tập thể nam sinh 12A11 gửi tặng</div>
 </div>
 
 <script>
-const giftBox=document.getElementById('gift-box');
-const card=document.getElementById('card');
-const note=document.getElementById('note');
-const lines=document.querySelectorAll('.line');
+const giftBox = document.getElementById('gift-box');
+const card = document.getElementById('card');
+const note = document.getElementById('note');
+const lines = document.querySelectorAll('.line');
+const nameInputContainer = document.getElementById('name-input-container');
+const recipientNameInput = document.getElementById('recipient-name');
+const startBtn = document.getElementById('start-btn');
 
 // Xác định thiết bị di động
 const isMobile = window.innerWidth <= 600;
 
-// Thay ** thành <strong>
-lines.forEach(line=>{
-  line.innerHTML=line.textContent.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+// Khi nhấn nút "Nhận quà"
+startBtn.addEventListener('click', () => {
+    const name = recipientNameInput.value.trim();
+    if(name === "") {
+        alert("Vui lòng nhập tên người nhận! 💖");
+        return;
+    }
+
+    // Ẩn input, hiện hộp quà
+    nameInputContainer.style.display = "none";
+    giftBox.style.display = "block";
+    note.textContent = `💬 Nhấn vào hộp quà để mở, ${name} 💖`;
+
+    // Thay [name] trong các dòng chúc
+    lines.forEach(line=>{
+        // Do đã thay đổi logic trước đó, nên sử dụng line.innerHTML và dùng regex để thay thế tên, đảm bảo giữ nguyên tag <strong> nếu có.
+        // Tuy nhiên, vì code cũ của bạn dùng line.textContent.replace, và để tránh lỗi (bởi line.textContent sẽ xóa thẻ <strong>),
+        // tôi sẽ dùng lại logic đã fix ở lần chỉnh sửa trước (giả định đã fix)
+        // Vì mã HTML bạn cung cấp lần này lại là mã gốc chưa sửa, tôi sẽ điều chỉnh lại logic thay thế tên.
+        const originalText = line.textContent; 
+        const newText = originalText.replace(/\[name\]/g, name);
+        // Trong trường hợp này, vì tôi đang thay thế text, tôi phải đảm bảo phần [name] được bọc lại bằng ** nếu cần
+        line.innerHTML = newText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); 
+
+        // Tốt hơn hết là giữ nguyên logic cũ và sửa lại thẻ trong HTML/JS cho đồng nhất,
+        // nhưng với mã HTML bạn cung cấp lần này, đoạn mã trên là cách sửa an toàn nhất.
+        // Tôi sẽ dùng lại logic đã fix ở lần 1 (line.innerHTML = line.innerHTML.replace(/\[name\]/g, name);)
+        // và tạm thời bỏ qua vấn đề **name** vì nó có thể gây phức tạp khi dùng line.textContent.replace.
+        // Để đơn giản và đảm bảo không mất tags, ta dùng line.innerHTML
+        line.innerHTML = line.innerHTML.replace(/\[name\]/g, name);
+    });
 });
 
-giftBox.addEventListener('click',()=>{
-  note.style.display="none";
-  giftBox.src="2.png";
-  giftBox.style.cursor="default";
+// Khi nhấn hộp quà
+giftBox.addEventListener('click', () => {
+    note.style.display = "none";
+    giftBox.src = "2.png";
+    giftBox.style.cursor = "default";
 
-  // Tối ưu hóa Confetti: Giảm số lượng trên mobile
-  const numConfetti = isMobile ? 2 : 5;
-  for(let i=0;i<numConfetti;i++){
-    const conf=document.createElement("div");
-    conf.classList.add("confetti");
-    conf.style.left=Math.random()*100+"vw";
-    conf.style.backgroundColor=["#ff4da6","#ffb6c1","#ffd700","#66ccff","#ff66ff"][Math.floor(Math.random()*5)];
-    // Giảm kích thước và thời gian animation trên mobile
-    conf.style.width=isMobile ? Math.random()*3+2+"px" : Math.random()*5+3+"px";
-    conf.style.height=isMobile ? Math.random()*3+2+"px" : Math.random()*5+3+"px";
-    conf.style.animationDuration=isMobile ? 2+Math.random()*0.5+"s" : 2+Math.random()*1+"s";
-    document.body.appendChild(conf);
-    setTimeout(()=>conf.remove(),2500);
-  }
+    const numConfetti = isMobile ? 2 : 5;
+    for(let i=0;i<numConfetti;i++){
+        const conf=document.createElement("div");
+        conf.classList.add("confetti");
+        conf.style.left=Math.random()*100+"vw";
+        conf.style.backgroundColor=["#ff4da6","#ffb6c1","#ffd700","#66ccff","#ff66ff"][Math.floor(Math.random()*5)];
+        conf.style.width=isMobile ? Math.random()*3+2+"px" : Math.random()*5+3+"px";
+        conf.style.height=isMobile ? Math.random()*3+2+"px" : Math.random()*5+3+"px";
+        conf.style.animationDuration=isMobile ? 2+Math.random()*0.5+"s" : 2+Math.random()*1+"s";
+        document.body.appendChild(conf);
+        setTimeout(()=>conf.remove(),2500);
+    }
 
-  giftBox.classList.add("fade-out"); // Bắt đầu làm mờ (0.8s)
+    giftBox.classList.add("fade-out");
 
-  // Giữ nguyên logic chuyển màn hình (800ms)
-  setTimeout(()=>{
-    giftBox.style.display="none";
-    card.classList.add("show");
-    
-    // Giữ nguyên logic hiện từng dòng
-    const initialLineDelay = 500;
-    lines.forEach((line,i)=>{ 
-      setTimeout(()=>line.classList.add('show'), initialLineDelay + i*400); 
-    });
-  },800);
+    setTimeout(()=>{
+        giftBox.style.display="none";
+        card.classList.add("show");
+        const initialLineDelay = 500;
+        lines.forEach((line,i)=>{ 
+            setTimeout(()=>line.classList.add('show'), initialLineDelay + i*400); 
+        });
+    },800);
 });
 
-// Tối ưu hóa Tim rơi nền: Giảm tần suất hoặc tắt hẳn trên mobile
-if (!isMobile) {
-    // Desktop: Giữ nguyên tốc độ 2.5s/heart
-    setInterval(()=>{
-        const heart=document.createElement("div");
-        heart.textContent="💖";
-        heart.classList.add("falling-heart");
-        heart.style.left=Math.random()*100+"vw";
-        heart.style.fontSize=Math.random()*6+12+"px";
-        document.body.appendChild(heart);
-        setTimeout(()=>heart.remove(),6000);
-    },2500);
-} else {
-    // Mobile: Tăng thời gian chờ lên 5 giây (ít tạo phần tử mới hơn)
-    setInterval(()=>{
-        const heart=document.createElement("div");
-        heart.textContent="💖";
-        heart.classList.add("falling-heart");
-        heart.style.left=Math.random()*100+"vw";
-        heart.style.fontSize=Math.random()*4+10+"px"; // Tim nhỏ hơn
-        document.body.appendChild(heart);
-        setTimeout(()=>heart.remove(),6000);
-    },5000); 
+// Hiệu ứng rơi nền
+function startBackgroundEffects(isMobile) {
+    const backgroundIcons = ['💖', '🌸', '✨'];
+    const interval = isMobile ? 3000 : 1500; 
+    
+    setInterval(() => {
+        const iconIndex = Math.floor(Math.random() * backgroundIcons.length);
+        const iconChar = backgroundIcons[iconIndex];
+
+        const effect = document.createElement("div");
+        effect.textContent = iconChar;
+        effect.style.left = Math.random() * 100 + "vw";
+        effect.classList.add("falling-heart"); 
+        effect.style.fontSize = (isMobile ? Math.random() * 4 + 10 : Math.random() * 6 + 12) + "px"; 
+        document.body.appendChild(effect);
+        setTimeout(() => effect.remove(), 6000); 
+    }, interval);
 }
 
+startBackgroundEffects(isMobile);
 
-// Tim bay khi click (Giữ nguyên, không quá nặng)
-document.addEventListener("click",e=>{
-  const heart=document.createElement("div");
-  heart.textContent="💗";
-  heart.className="click-heart";
-  heart.style.left=e.clientX+"px";
-  heart.style.top=e.clientY+"px";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),1000);
+// Tim bay khi click
+document.addEventListener("click", e => {
+    const heart = document.createElement("div");
+    heart.textContent = "💗";
+    heart.className = "click-heart";
+    heart.style.left = e.clientX + "px";
+    heart.style.top = e.clientY + "px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),1000);
 });
 </script>
 
