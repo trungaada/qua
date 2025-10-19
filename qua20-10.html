@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>💖 Món quà 20/10 💐</title>
-  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -111,12 +111,16 @@
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     }
 
-    /* Nội dung lời chúc */
+    /* Nội dung lời chúc (ĐIỀU CHỈNH CĂN GIỮA VÀ KÍCH THƯỚC) */
     #card p {
-      font-size: 22px; /* Kích thước PC */
+      font-size: 18px; /* Giữ kích thước nhỏ gọn */
       color: #333;
-      line-height: 1.8;
+      line-height: 1.5; /* Giảm line-height cho căn chỉnh tốt hơn */
       font-family: 'Quicksand', sans-serif;
+      /* ĐIỀU CHỈNH: Căn giữa nội dung */
+      text-align: center; 
+      width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng thẻ */
+      margin: 0;
     }
     
     .signature {
@@ -126,12 +130,14 @@
         color: #b80050;
     }
 
-    /* Hiệu ứng từng dòng */
+    /* Hiệu ứng từng dòng (ĐIỀU CHỈNH ĐỂ CĂN GIỮA) */
     .line {
       opacity: 0;
       transform: translateY(15px);
-      display: block; /* Thay đổi thành block để mỗi dòng chiếm một hàng */
-      margin-bottom: 10px; /* Thêm khoảng cách giữa các dòng */
+      /* Chuyển sang inline-block để căn giữa và mỗi dòng là một khối */
+      display: inline-block; 
+      margin-bottom: 15px; /* TĂNG: Khoảng cách giữa các đoạn chúc */
+      padding: 0 10px; /* Thêm padding ngang để nội dung không sát lề quá */
     }
     .line.show {
       animation: lineUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
@@ -190,27 +196,30 @@
     /* MEDIA QUERY cho màn hình điện thoại (<= 600px) */
     @media (max-width: 600px) {
         #card {
-            border-radius: 15px; /* Giảm bo tròn */
-            padding: 25px; /* Giảm padding */
-            width: 95%; /* Chiếm nhiều không gian hơn trên mobile */
+            border-radius: 15px; 
+            padding: 25px; 
+            width: 95%; 
         }
         #gift-box {
-            width: 250px; /* Hộp quà nhỏ hơn */
+            width: 250px; 
         }
         #note {
-            font-size: 16px; /* Chú thích nhỏ hơn */
+            font-size: 16px; 
         }
         #card h1 {
-            font-size: 30px; /* Giảm font tiêu đề */
+            font-size: 30px; 
             margin-bottom: 15px;
         }
         #card p {
-            font-size: 16px; /* Giảm font nội dung */
-            line-height: 1.6;
+            font-size: 14px; /* Giảm font nội dung */
+            line-height: 1.5;
         }
         .signature {
-            font-size: 20px; /* Giảm font chữ ký */
+            font-size: 20px; 
             margin-top: 20px;
+        }
+        .line {
+            margin-bottom: 10px; /* Giảm khoảng cách dòng trên di động */
         }
     }
   </style>
@@ -273,7 +282,7 @@
 
         // Hiển thị từng dòng chậm hơn
         lines.forEach((line, i) => {
-          setTimeout(() => line.classList.add('show'), i * 1200);
+          setTimeout(() => line.classList.add('show'), i * 800); // Giảm thời gian trễ để hiển thị nhanh hơn
         });
       }, 1200);
     });
@@ -286,6 +295,7 @@
       heart.style.left = Math.random() * 100 + "vw";
       heart.style.fontSize = Math.random() * 15 + 15 + "px";
       heart.style.opacity = Math.random() * 0.5 + 0.5;
+      heart.style.animationDuration = '8s';
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 8000);
     }, 600);
@@ -304,4 +314,3 @@
 
 </body>
 </html>
-
