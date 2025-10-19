@@ -3,204 +3,304 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💝 Quà Tặng 20/10 💐</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <title>💖 Món quà 20/10 💐</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
+      padding: 0;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      font-family: 'Quicksand', sans-serif;
-      overflow: hidden;
       /* Nền hồng phấn nhẹ nhàng, tinh tế */
-      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%); 
-      position: relative;
-    }
-
-    /* Hiệu ứng ánh sáng bokeh/glitter nhẹ nhàng hơn */
-    .bokeh {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .circle {
-      position: absolute;
-      border-radius: 50%;
-      /* Màu nhạt, dịu hơn */
-      background: rgba(255, 255, 255, 0.4); 
-      box-shadow: 0 0 10px rgba(255, 182, 193, 0.6);
-      animation: float 15s infinite ease-in-out; /* Chậm hơn */
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0) scale(1); opacity: 0.5; }
-      50% { transform: translateY(-50px) scale(1.1); opacity: 0.8; }
-      100% { transform: translateY(0) scale(1); opacity: 0.5; }
-    }
-
-    /* Nội dung chính */
-    .container {
+      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+      font-family: 'Quicksand', sans-serif;
       text-align: center;
+      overflow: hidden;
       position: relative;
-      z-index: 5;
-      padding: 20px; /* Thêm padding tổng thể cho màn hình nhỏ */
     }
 
-    h1 {
-      /* Font sang trọng */
-      font-family: 'Playfair Display', serif; 
-      font-size: 55px; /* Kích thước PC */
-      color: #b80050; /* Đỏ đô/Hồng đậm */
-      margin-bottom: 30px;
-      text-shadow: 1px 1px 3px rgba(255, 105, 180, 0.4);
-      animation: textPulse 3s infinite ease-in-out;
+    /* Ghi chú */
+    #note {
+      color: #880e4f;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: 25px;
+      animation: glowText 2.5s ease-in-out infinite alternate;
+      text-shadow: 0 0 8px rgba(255, 182, 193, 0.7);
+      letter-spacing: 0.5px;
     }
-    @keyframes textPulse {
+
+    @keyframes glowText {
+      from { opacity: 0.7; transform: scale(1); }
+      to { opacity: 1; transform: scale(1.02); }
+    }
+
+    /* Hộp quà */
+    #gift-box {
+      width: 300px;
+      cursor: pointer;
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      animation: pulse 2s infinite ease-in-out;
+      z-index: 5;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+    #gift-box:hover { 
+      transform: scale(1.05); 
+      box-shadow: 0 15px 30px rgba(255, 105, 180, 0.6);
+    }
+
+    @keyframes pulse {
       0% { transform: scale(1); }
-      50% { transform: scale(1.02); }
+      50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
 
-    button {
-      padding: 18px 45px;
-      font-size: 24px; /* Kích thước PC */
-      font-family: 'Playfair Display', serif;
-      border: 2px solid #ff80a0;
-      border-radius: 10px;
-      /* Gradient tinh tế hơn */
-      background: linear-gradient(145deg, #ffc0cb, #ff80a0);
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
-      transition: all 0.4s ease;
+    .fade-out { animation: fadeOut 1s forwards; }
+    @keyframes fadeOut {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(0.7); }
+    }
+
+    /* Thiệp */
+    #card {
+      display: none;
+      /* Background giấy trắng ngà, tinh tế */
+      background: #fffcf8; 
+      border-radius: 25px;
+      /* Thêm khung viền mỏng giống thiệp */
+      border: 4px solid #ffb6c1; /* Viền hồng nhạt */
+      /* Box shadow glow sang trọng và thêm shadow bên trong để tạo lớp */
+      box-shadow: 0 0 40px rgba(255, 105, 180, 0.6),
+                  inset 0 0 10px rgba(255, 182, 193, 0.4); 
+      padding: 50px; /* Kích thước PC */
+      width: 85%;
+      max-width: 650px;
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 1.5s ease, transform 1.5s ease;
+      z-index: 10;
       position: relative;
-      overflow: hidden;
-      font-weight: bold;
-      letter-spacing: 1px;
     }
 
-    button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(255, 20, 147, 0.8);
-      background: linear-gradient(145deg, #ff80a0, #ffc0cb);
+    #card.show {
+      display: block;
+      opacity: 1;
+      transform: scale(1);
+      /* Ánh sáng glow mềm mại hơn */
+      animation: glow 3s ease-in-out infinite alternate;
     }
 
-    /* Hiệu ứng lấp lánh (sparkle) tinh tế hơn */
-    button::before, button::after {
-      content: '';
-      position: absolute;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.8;
+    @keyframes glow {
+      from { box-shadow: 0 0 25px rgba(255, 182, 193, 0.6), inset 0 0 10px rgba(255, 182, 193, 0.4); }
+      to { box-shadow: 0 0 55px rgba(255, 105, 180, 0.8), inset 0 0 15px rgba(255, 105, 180, 0.6); }
     }
 
-    button::before {
-      width: 10px; height: 10px;
-      top: 10px; left: 15%;
-      animation: sparkle 2s infinite;
-    }
-    button::after {
-      width: 8px; height: 8px;
-      bottom: 10px; right: 10%;
-      animation: sparkle 2s infinite reverse;
-    }
-
-    @keyframes sparkle {
-      0%, 100% { transform: scale(1); opacity: 0.5; }
-      50% { transform: scale(1.5); opacity: 1; }
+    /* Tiêu đề */
+    #card h1 {
+      color: #b80050;
+      font-family:'Playfair Display', serif;
+      font-size: 45px; /* Kích thước PC */
+      margin-top: 10px;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     }
 
-    /* Tim rơi & hoa bay */
-    .heart, .flower {
+    /* Nội dung lời chúc */
+    #card p {
+      font-size: 22px; /* Kích thước PC */
+      color: #333;
+      line-height: 1.8;
+      font-family: 'Quicksand', sans-serif;
+    }
+    
+    .signature {
+        margin-top: 30px;
+        font-family:'Playfair Display', serif;
+        font-size: 28px; /* Kích thước PC */
+        color: #b80050;
+    }
+
+    /* Hiệu ứng từng dòng */
+    .line {
+      opacity: 0;
+      transform: translateY(15px);
+      display: block; /* Thay đổi thành block để mỗi dòng chiếm một hàng */
+      margin-bottom: 10px; /* Thêm khoảng cách giữa các dòng */
+    }
+    .line.show {
+      animation: lineUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+    @keyframes lineUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Tim rơi (Ít, nhỏ và chậm hơn) */
+    .falling-heart {
       position: fixed;
+      top: -10px;
       pointer-events: none;
-      z-index: 2;
-      animation-timing-function: linear;
-      filter: drop-shadow(0 0 2px rgba(255, 105, 180, 0.5));
+      animation: fall 8s linear forwards;
+      z-index: 1;
+      opacity: 0.8;
+      filter: drop-shadow(0 0 1px #ff69b4);
     }
 
     @keyframes fall {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Tim bay khi click */
+    .click-heart {
+      position: fixed;
+      animation: floatUp 1.5s ease-out forwards;
+      font-size: 28px;
+      pointer-events: none;
+      filter: drop-shadow(0 0 5px #ff69b4);
     }
 
     @keyframes floatUp {
-      0% { transform: translateY(0) scale(0.8); opacity: 1; }
-      100% { transform: translateY(-100vh) scale(1.5) rotate(-30deg); opacity: 0; }
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100px) scale(2); opacity: 0; }
     }
 
+    /* Pháo giấy */
+    .confetti {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background-color: pink;
+      opacity: 0.9;
+      animation: confetti-fall 4s ease-out forwards;
+      z-index: 20;
+      border-radius: 50%;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+    
     /* MEDIA QUERY cho màn hình điện thoại (<= 600px) */
     @media (max-width: 600px) {
-      h1 {
-        font-size: 30px; /* Cỡ chữ PC là 55px, giảm xuống 30px cho di động */
-        margin-bottom: 15px; /* Giảm khoảng cách dưới */
-        line-height: 1.3; 
-      }
-      button {
-        padding: 12px 25px; /* Giảm padding */
-        font-size: 18px; /* Cỡ chữ PC là 24px, giảm xuống 18px cho di động */
-        width: 80%; /* Chiếm phần lớn chiều rộng */
-        max-width: 300px;
-      }
-      .container {
-          padding: 10px; /* Giảm padding tổng thể */
-      }
+        #card {
+            border-radius: 15px; /* Giảm bo tròn */
+            padding: 25px; /* Giảm padding */
+            width: 95%; /* Chiếm nhiều không gian hơn trên mobile */
+        }
+        #gift-box {
+            width: 250px; /* Hộp quà nhỏ hơn */
+        }
+        #note {
+            font-size: 16px; /* Chú thích nhỏ hơn */
+        }
+        #card h1 {
+            font-size: 30px; /* Giảm font tiêu đề */
+            margin-bottom: 15px;
+        }
+        #card p {
+            font-size: 16px; /* Giảm font nội dung */
+            line-height: 1.6;
+        }
+        .signature {
+            font-size: 20px; /* Giảm font chữ ký */
+            margin-top: 20px;
+        }
     }
   </style>
 </head>
 <body>
-  <div class="bokeh" id="bokeh"></div>
 
-  <div class="container">
-    <h1>💐 Món quà nhỏ gửi tặng Ngày Phụ nữ Việt Nam 20/10 💝</h1>
-    <button onclick="location.href='qua20-10.html'">🎁 Mở Hộp Quà Đê Các Bạn 💖</button>
+  <img id="gift-box" src="1.jpg" alt="Hộp quà">
+  <div id="note">💬 Nhấn vào hộp quà để mở nhé 💖</div>
+
+  <div id="card">
+    <div style="font-size:60px; margin-bottom:15px; color:#ff69b4;">🌷🎉</div>
+    <h1>💖 Chúc Mừng 20/10 💐</h1>
+    
+    <p>
+      <span class="line">Kính gửi **Cô Mai** và các **bạn nữ 12A11** thân yêu!</span>
+      <span class="line">🌹 Nhân Ngày Phụ nữ Việt Nam 20/10, xin gửi những lời chúc tốt đẹp nhất.</span>
+      <span class="line">🌸 Chúc Cô luôn mạnh khỏe, giữ mãi nụ cười rạng rỡ và luôn là người truyền cảm hứng cho chúng em.</span>
+      <span class="line">✨ Chúc các bạn nữ luôn xinh đẹp, tự tin, và đạt được mọi ước mơ trên con đường sắp tới!</span>
+      <span class="line">💕 Cảm ơn Cô và các bạn đã tô điểm cho tập thể 12A11 thêm ấm áp và tuyệt vời!</span>
+    </p>
+    
+    <div class="signature">
+        Tập thể nam sinh 12A11 gửi tặng
+    </div>
   </div>
 
   <script>
-    // Tạo hiệu ứng ánh sáng bokeh nhẹ
-    const bokeh = document.getElementById('bokeh');
-    for (let i = 0; i < 15; i++) {
-      const c = document.createElement('div');
-      c.classList.add('circle');
-      c.style.width = c.style.height = Math.random() * 80 + 40 + 'px';
-      c.style.left = Math.random() * 100 + 'vw';
-      c.style.top = Math.random() * 100 + 'vh';
-      c.style.animationDuration = 10 + Math.random() * 10 + 's';
-      bokeh.appendChild(c);
-    }
+    const giftBox = document.getElementById('gift-box');
+    const card = document.getElementById('card');
+    const note = document.getElementById('note');
+    const lines = document.querySelectorAll('.line');
 
-    // Tim rơi (Ít tim hơn, chậm hơn)
+    giftBox.addEventListener('click', () => {
+      note.style.display = "none";
+      
+      // Giả định có ảnh hộp quà đã mở (ví dụ: 2.png)
+      giftBox.src = "2.png"; 
+      giftBox.style.animation = "none";
+      giftBox.style.cursor = "default";
+
+      // Pháo giấy
+      for (let i = 0; i < 20; i++) {
+        const conf = document.createElement("div");
+        conf.classList.add("confetti");
+        conf.style.left = Math.random() * 100 + "vw";
+        conf.style.backgroundColor = ["#ff4da6","#ffb6c1","#ffd700","#66ccff","#ff66ff"][Math.floor(Math.random()*5)];
+        conf.style.width = Math.random()*6+4+"px";
+        conf.style.height = Math.random()*6+4+"px";
+        conf.style.animationDuration = 3 + Math.random()*1 + "s";
+        document.body.appendChild(conf);
+        setTimeout(() => conf.remove(), 4000);
+      }
+
+      // Hộp mờ dần, chuyển sang thiệp
+      giftBox.classList.add("fade-out");
+
+      setTimeout(() => {
+        giftBox.style.display = "none";
+        card.classList.add("show");
+
+        // Hiển thị từng dòng chậm hơn
+        lines.forEach((line, i) => {
+          setTimeout(() => line.classList.add('show'), i * 1200);
+        });
+      }, 1200);
+    });
+
+    // Tim rơi nền
     setInterval(() => {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.textContent = '💖';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.fontSize = Math.random() * 15 + 20 + 'px';
-      heart.style.animation = `fall ${6 + Math.random() * 4}s linear forwards`;
+      const heart = document.createElement("div");
+      heart.innerHTML = "💖";
+      heart.classList.add("falling-heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 15 + 15 + "px";
+      heart.style.opacity = Math.random() * 0.5 + 0.5;
       document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 10000);
-    }, 800);
+      setTimeout(() => heart.remove(), 8000);
+    }, 600);
 
-    // Hoa bay lên (Ít hoa hơn, chậm hơn)
-    setInterval(() => {
-      const flower = document.createElement('div');
-      flower.classList.add('flower');
-      flower.textContent = ['🌸','🌹','🌷'][Math.floor(Math.random()*3)];
-      flower.style.left = Math.random() * 100 + 'vw';
-      flower.style.fontSize = Math.random() * 20 + 20 + 'px';
-      flower.style.animation = `floatUp ${7 + Math.random() * 4}s linear forwards`;
-      document.body.appendChild(flower);
-      setTimeout(() => flower.remove(), 11000);
-    }, 3000);
+    // Tim bay khi click
+    document.addEventListener("click", e => {
+      const heart = document.createElement("div");
+      heart.textContent = "💗";
+      heart.className = "click-heart";
+      heart.style.left = e.clientX + "px";
+      heart.style.top = e.clientY + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1500);
+    });
   </script>
+
 </body>
 </html>
