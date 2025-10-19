@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>💝 Quà Tặng 20/10 💐</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -54,6 +55,19 @@
       padding: 20px; /* Thêm padding tổng thể cho màn hình nhỏ */
     }
 
+    /* ICON LỚN TRÊN ĐẦU (MỚI) */
+    .main-icon {
+        font-size: 80px;
+        color: #ff3385;
+        margin-bottom: 5px;
+        text-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
+        animation: iconBeat 1.5s infinite alternate;
+    }
+    @keyframes iconBeat {
+        from { transform: scale(1); }
+        to { transform: scale(1.1); }
+    }
+    
     /* Tiêu đề chính (Chữ nghiêng, hồng đậm như mẫu) */
     h1 {
       font-family: 'Playfair Display', serif; 
@@ -67,7 +81,7 @@
       animation: textPulse 3s infinite ease-in-out;
     }
     
-    /* Chú thích nhỏ bên dưới (Thêm mới để giống mẫu) */
+    /* Chú thích nhỏ bên dưới */
     .note-text {
         font-family: 'Quicksand', sans-serif;
         font-size: 18px;
@@ -86,8 +100,8 @@
       padding: 18px 45px;
       font-size: 24px;
       font-family: 'Playfair Display', serif;
-      border: none; /* Bỏ viền để giống mẫu */
-      border-radius: 50px; /* Bo tròn hết cỡ */
+      border: none; 
+      border-radius: 50px; 
       /* Gradient sáng và rõ hơn như mẫu */
       background: linear-gradient(145deg, #ff99b3, #ff6699);
       color: white;
@@ -144,7 +158,7 @@
       50% { transform: scale(1.5); opacity: 1; }
     }
 
-    /* Tim rơi & hoa bay (Giữ tốc độ đã điều chỉnh) */
+    /* Tim rơi & hoa bay */
     .heart, .flower {
       position: fixed;
       pointer-events: none;
@@ -165,6 +179,9 @@
 
     /* MEDIA QUERY cho màn hình điện thoại (<= 600px) */
     @media (max-width: 600px) {
+        .main-icon {
+            font-size: 60px;
+        }
       h1 {
         font-size: 30px; 
         margin-bottom: 10px; 
@@ -193,7 +210,8 @@
   <div class="bokeh" id="bokeh"></div>
 
   <div class="container">
-    <h1>💐 Món Quà Nhỏ Gửi Tặng Các Bạn Ngày 20/10 💐</h1>
+    <div class="main-icon">❤️</div>
+    <h1>Chúc mừng Ngày Phụ Nữ Việt Nam 20/10!</h1>
     <div class="note-text">Món quà nhỏ bé chứa đựng cả tấm lòng. Hãy nhấn nút bên dưới để nhận nhé 💌</div>
     
     <button onclick="location.href='qua20-10.html'">Nhận quà 💖</button>
@@ -202,7 +220,7 @@
   </div>
 
   <script>
-    // Tạo hiệu ứng ánh sáng bokeh nhẹ (Giữ nguyên)
+    // Tạo hiệu ứng ánh sáng bokeh nhẹ
     const bokeh = document.getElementById('bokeh');
     for (let i = 0; i < 15; i++) {
       const c = document.createElement('div');
@@ -214,31 +232,31 @@
       bokeh.appendChild(c);
     }
 
-    // Tim rơi (ĐÃ TĂNG TỐC ĐỘ và TẦN SUẤT ở bước trước, giữ lại)
+    // Tim rơi 
     setInterval(() => {
       const heart = document.createElement('div');
       heart.classList.add('heart');
       heart.textContent = '💖';
       heart.style.left = Math.random() * 100 + 'vw';
       heart.style.fontSize = Math.random() * 15 + 20 + 'px';
-      const duration = 3 + Math.random() * 3; // Nhanh hơn
+      const duration = 3 + Math.random() * 3; 
       heart.style.animation = `fall ${duration}s linear forwards`;
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), duration * 1000 + 500);
-    }, 400); // Tần suất cao hơn
+    }, 400); 
 
-    // Hoa bay lên (ĐÃ TĂNG TỐC ĐỘ và TẦN SUẤT ở bước trước, giữ lại)
+    // Hoa bay lên 
     setInterval(() => {
       const flower = document.createElement('div');
       flower.classList.add('flower');
       flower.textContent = ['🌸','🌹','🌷'][Math.floor(Math.random()*3)];
       flower.style.left = Math.random() * 100 + 'vw';
       flower.style.fontSize = Math.random() * 20 + 20 + 'px';
-      const duration = 4 + Math.random() * 3; // Nhanh hơn
+      const duration = 4 + Math.random() * 3; 
       flower.style.animation = `floatUp ${duration}s linear forwards`;
       document.body.appendChild(flower);
       setTimeout(() => flower.remove(), duration * 1000 + 500);
-    }, 1500); // Tần suất cao hơn
+    }, 1500); 
   </script>
 </body>
 </html>
