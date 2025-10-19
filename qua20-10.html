@@ -49,6 +49,7 @@
       z-index: 5;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       border-radius: 10px;
+      will-change: transform; /* Tối ưu */
     }
     #gift-box:hover { 
       transform: scale(1.05); 
@@ -84,6 +85,7 @@
       z-index: 10;
       position: relative;
       overflow: hidden; 
+      will-change: transform, opacity; /* Tối ưu */
       
       /* Nền chấm bi mờ */
       background-image: radial-gradient(#ffebee 10%, transparent 10%),
@@ -155,6 +157,7 @@
         /* Áp dụng animation */
         animation: heartBeat 1.5s infinite alternate;
         text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+        will-change: transform; /* Tối ưu */
     }
     @keyframes heartBeat {
         0% { 
@@ -242,6 +245,7 @@
       z-index: 1;
       opacity: 0.8;
       filter: drop-shadow(0 0 1px #ff69b4);
+      will-change: transform, opacity; /* Tối ưu */
     }
 
     @keyframes fall {
@@ -256,6 +260,7 @@
       font-size: 28px;
       pointer-events: none;
       filter: drop-shadow(0 0 5px #ff69b4);
+      will-change: transform, opacity; /* Tối ưu */
     }
 
     @keyframes floatUp {
@@ -400,7 +405,7 @@
       }, 1200);
     });
 
-    // Tim rơi nền
+    // Tim rơi nền - Giảm tần suất tạo DOM từ 600ms lên 800ms
     setInterval(() => {
       const heart = document.createElement("div");
       heart.innerHTML = "💖";
@@ -411,7 +416,7 @@
       heart.style.animationDuration = '8s';
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 8000);
-    }, 600);
+    }, 800);
 
     // Tim bay khi click
     document.addEventListener("click", e => {
