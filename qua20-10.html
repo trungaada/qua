@@ -20,6 +20,7 @@
       text-align: center;
       overflow: hidden;
       position: relative;
+      perspective: 1000px; 
     }
 
     /* Ghi chú */
@@ -71,43 +72,99 @@
       display: none;
       background: #fffcf8; 
       border-radius: 25px;
-      border: 4px solid #ffb6c1; 
-      box-shadow: 0 0 40px rgba(255, 105, 180, 0.6),
-                  inset 0 0 10px rgba(255, 182, 193, 0.4); 
+      border: 12px solid #fce4ec; /* Viền ngoài màu hồng nhạt, dày */
+      box-shadow: 0 0 40px rgba(255, 105, 180, 0.6), /* Viền ngoài tỏa sáng */
+                  inset 0 0 0 3px #ffb6c1; 
       padding: 50px; /* Kích thước PC */
       width: 85%;
       max-width: 650px;
       text-align: center;
       opacity: 0;
       transform: scale(0.8);
-      transition: opacity 1.5s ease, transform 1.5s ease;
       z-index: 10;
       position: relative;
+      overflow: hidden; 
+      
+      /* Nền chấm bi mờ */
+      background-image: radial-gradient(#ffebee 10%, transparent 10%),
+                        radial-gradient(#ffcdd2 10%, transparent 10%);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
     }
+    
+    /* Viền trang trí nét đứt */
+    #card::before {
+        content: '';
+        position: absolute;
+        top: 20px; 
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        border: 2px dashed #ff99b3; 
+        border-radius: 10px; 
+        pointer-events: none; 
+        z-index: 1; 
+    }
+
+    /* Hoạt ảnh nổi nhẹ nhàng */
+    @keyframes cardFloat {
+        0% { transform: translate(0, 0); }
+        50% { transform: translate(0, -3px); } /* Nổi 3px */
+        100% { transform: translate(0, 0); }
+    }
+
 
     #card.show {
       display: block;
-      opacity: 1;
-      transform: scale(1);
-      animation: glow 3s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow {
-      from { box-shadow: 0 0 25px rgba(255, 182, 193, 0.6), inset 0 0 10px rgba(255, 182, 193, 0.4); }
-      to { box-shadow: 0 0 55px rgba(255, 105, 180, 0.8), inset 0 0 15px rgba(255, 105, 180, 0.6); }
+      /* Hiệu ứng tổng hợp cho thiệp: Sáng + Lật vào + Nghiêng liên tục + Nổi nhẹ */
+      animation: glow 3s ease-in-out infinite alternate, 
+                 cardFlipIn 1.5s ease-out forwards,
+                 cardTilt 10s infinite ease-in-out 1.5s,
+                 cardFloat 5s infinite ease-in-out 1.5s; 
     }
     
-    /* ICON LỚN TRÊN ĐẦU THIỆP (MỚI) */
+    /* Hoạt ảnh lật 3D */
+    @keyframes cardFlipIn {
+        0% { transform: scale(0.8) rotateX(90deg) rotateZ(0deg); opacity: 0; }
+        100% { transform: scale(1) rotateX(0deg) rotateZ(0deg); opacity: 1; }
+    }
+    
+    /* Hoạt ảnh nghiêng 3D liên tục */
+    @keyframes cardTilt {
+        0% { transform: rotateX(0deg) rotateY(0deg); }
+        50% { transform: rotateX(1deg) rotateY(-1deg); }
+        100% { transform: rotateX(0deg) rotateY(0deg); }
+    }
+
+
+    @keyframes glow {
+      from { box-shadow: 0 0 25px rgba(255, 182, 193, 0.6), inset 0 0 0 3px #ffb6c1; }
+      to { box-shadow: 0 0 55px rgba(255, 105, 180, 0.8), inset 0 0 0 3px #b80050; }
+    }
+    
+    /* ICON LỚN TRÊN ĐẦU THIỆP */
     .card-main-icon {
         font-size: 50px;
         color: #ff69b4;
         margin-bottom: 5px;
+        /* Thêm box-shadow để tạo hào quang (radial glow) */
+        box-shadow: 0 0 10px 5px rgba(255, 105, 180, 0.5); 
+        border-radius: 50%; /* Để hào quang tròn */
+        padding: 5px; /* Tạo không gian cho hào quang */
+        display: inline-block;
+        /* Áp dụng animation */
         animation: heartBeat 1.5s infinite alternate;
         text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
     }
     @keyframes heartBeat {
-        0% { transform: scale(1); }
-        100% { transform: scale(1.05); }
+        0% { 
+            transform: scale(1); 
+            box-shadow: 0 0 8px 4px rgba(255, 105, 180, 0.4); /* Hào quang nhỏ hơn */
+        }
+        100% { 
+            transform: scale(1.05); 
+            box-shadow: 0 0 15px 7px rgba(255, 105, 180, 0.7); /* Hào quang lớn hơn và sáng hơn */
+        }
     }
 
     /* Tiêu đề */
@@ -126,34 +183,22 @@
       50% { transform: scale(1.01); text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); }
       100% { transform: scale(1); text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); }
     }
-
-    /* Icon trên cùng */
-    .top-icons {
-        margin-bottom: 10px;
-        font-size: 45px;
-    }
-    .top-icons span {
-        filter: drop-shadow(0 0 5px rgba(255, 182, 193, 0.8)); 
-        animation: iconGlow 2s infinite alternate; 
-    }
-    @keyframes iconGlow {
-        from { filter: drop-shadow(0 0 5px rgba(255, 182, 193, 0.8)); }
-        to { filter: drop-shadow(0 0 10px rgba(255, 105, 180, 1)); }
-    }
     
     /* Nội dung lời chúc */
     #card p {
       font-size: 18px; 
-      color: #333;
-      line-height: 1.5; 
+      color: #111; 
+      line-height: 1.6; /* Tăng line-height cho dễ đọc */
       font-family: 'Quicksand', sans-serif;
       font-weight: 500;
       text-align: center; 
-      width: 85%; 
+      width: 90%; /* Giảm width để có lề trong tốt hơn */
       margin: 0 auto; 
+      word-wrap: break-word; /* Thêm thuộc tính này */
+      overflow-wrap: break-word; /* Và thuộc tính này */
     }
     
-    /* Highlight từ khóa (MỚI) */
+    /* Highlight từ khóa */
     #card p strong {
         color: #ff3385; /* Màu hồng nổi bật */
         font-weight: 700;
@@ -175,12 +220,14 @@
     .line {
       opacity: 0;
       transform: translateY(15px);
-      display: inline-block; 
-      margin-bottom: 15px; 
-      padding: 0 10px; 
+      /* Đổi từ inline-block sang block để ngắt dòng linh hoạt hơn */
+      display: block; 
+      margin-bottom: 12px; /* Giảm margin một chút */
+      padding: 0; 
+      text-align: center;
     }
     .line.show {
-      animation: lineUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      animation: lineUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
     }
     @keyframes lineUp {
       to { opacity: 1; transform: translateY(0); }
@@ -237,8 +284,15 @@
     @media (max-width: 600px) {
         #card {
             border-radius: 15px; 
-            padding: 25px; 
+            border: 8px solid #fce4ec; 
+            padding: 25px 15px; /* Điều chỉnh padding ngang */
             width: 95%; 
+        }
+        #card::before {
+            top: 15px; 
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
         }
         #gift-box {
             width: 250px; 
@@ -252,9 +306,8 @@
         }
         #card p {
             font-size: 14px; 
-            line-height: 1.5;
-            /* Đảm bảo khung chữ trên điện thoại cũng có lề */
-            width: 90%; 
+            line-height: 1.6;
+            width: 100%; /* Đặt lại thành 100% vì đã có padding của #card */
             margin: 0 auto;
         }
         .signature {
@@ -262,7 +315,11 @@
             margin-top: 20px;
         }
         .line {
-            margin-bottom: 10px; 
+            margin-bottom: 8px; /* Giảm thêm trên mobile */
+        }
+        .card-main-icon {
+            padding: 3px; /* Giảm padding trên mobile */
+            font-size: 40px;
         }
     }
   </style>
@@ -278,11 +335,13 @@
     <h1>💖 Chúc Mừng 20/10 💐</h1>
     
     <p>
-      <span class="line">Kính gửi **Cô Mai** và các **bạn nữ 12A11** thân yêu!</span>
-      <span class="line">🌹 Nhân Ngày Phụ nữ Việt Nam 20/10, xin gửi những lời **chúc tốt đẹp nhất**.</span>
-      <span class="line">🌸 Chúc Cô luôn **mạnh khỏe**, giữ mãi **nụ cười rạng rỡ** và luôn là người truyền cảm hứng cho chúng em.</span>
-      <span class="line">✨ Chúc các bạn nữ luôn **xinh đẹp**, **tự tin**, và đạt được **mọi ước mơ** trên con đường sắp tới!</span>
-      <span class="line">💕 Cảm ơn Cô và các bạn đã tô điểm cho tập thể 12A11 thêm **ấm áp và tuyệt vời**!</span>
+      <span class="line">Thân gửi **Cô Mai** và các **bạn nữ 12A11**!</span>
+      <span class="line">🌹 Nhân ngày 20/10, tập thể nam sinh xin gửi những lời chúc **tươi đẹp** và **tốt lành nhất** tới những người phụ nữ **tuyệt vời** của lớp chúng ta.</span>
+      <span class="line">🌸 **Cô Mai** - Chúc Cô luôn **vui vẻ**, **khỏe mạnh**, mãi mãi **trẻ trung** và là người thắp lửa **niềm đam mê** cho chúng em.</span>
+      <span class="line">✨ Chúc các **bạn nữ** - những **bông hoa rực rỡ** của 12A11, luôn **xinh đẹp**, học tập **thành công**, và thật **hạnh phúc** trong mọi khoảnh khắc.</span>
+      <span class="line">💕 Cảm ơn các bạn đã tạo nên những **kỷ niệm đáng nhớ** và tô thêm màu **rực rỡ** cho quãng thời gian cấp 3 này.</span>
+      <span class="line">💐 Chúc Cô và các bạn có một ngày 20/10 thật **ý nghĩa** và **ngập tràn niềm vui** bên những người thân yêu!</span>
+      <span class="line">**Trân trọng và yêu quý!**</span>
     </p>
     
     <div class="signature">
