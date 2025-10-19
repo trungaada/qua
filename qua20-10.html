@@ -44,7 +44,6 @@
       max-width: 80vw;
       height: auto;
       cursor: pointer;
-      /* Dùng transform cho hiệu ứng nhẹ nhàng hơn */
       transition: transform 0.5s ease;
       animation: pulse 2s infinite ease-in-out;
       z-index: 5;
@@ -78,7 +77,6 @@
       text-align: center;
       opacity: 0;
       transform: scale(0.8);
-      /* Sử dụng cubic-bezier để mượt hơn */
       transition: opacity 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       z-index: 10;
       position: relative;
@@ -131,12 +129,11 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Tim rơi nền (Tối ưu hóa) */
+    /* Tim rơi nền */
     .falling-heart {
       position: fixed;
       top: 0;
       pointer-events: none;
-      /* Dùng transform để hoạt động mượt hơn */
       animation: fall-bg 8s linear forwards; 
       z-index: 1;
       opacity: 0.8;
@@ -147,19 +144,7 @@
       100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
 
-    /* Tim bay khi click (Tối ưu hóa) */
-    .click-heart {
-      position: fixed;
-      /* Dùng transform */
-      animation: floatUp-click 1.5s ease-out forwards;
-      font-size: 28px;
-      pointer-events: none;
-      filter: drop-shadow(0 0 5px #ff69b4);
-    }
-    @keyframes floatUp-click {
-      0% { transform: translate(0, 0) scale(1); opacity: 1; }
-      100% { transform: translate(0, -100px) scale(2); opacity: 0; }
-    }
+    /* Đã XÓA CSS .click-heart VÀ @keyframes floatUp-click */
 
     /* Pháo giấy */
     .confetti {
@@ -225,7 +210,7 @@
       giftBox.style.cursor = "default";
 
       // Pháo giấy (Giảm số lượng, dùng biến thể random nhẹ nhàng hơn)
-      for (let i = 0; i < 15; i++) { // Giảm từ 20 xuống 15
+      for (let i = 0; i < 15; i++) { 
         const conf = document.createElement("div");
         conf.classList.add("confetti");
         conf.style.left = Math.random() * 100 + "vw";
@@ -257,23 +242,13 @@
       heart.innerHTML = "💖";
       heart.classList.add("falling-heart");
       heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = Math.random() * 10 + 10 + "px"; // Giảm kích thước
-      heart.style.opacity = Math.random() * 0.4 + 0.4; // Giảm opacity
+      heart.style.fontSize = Math.random() * 10 + 10 + "px"; 
+      heart.style.opacity = Math.random() * 0.4 + 0.4; 
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 8000);
-    }, 1000); // Tăng thời gian chờ từ 600ms lên 1000ms
+    }, 1000); 
 
-    // Tim bay khi click (Đã dùng transform)
-    document.addEventListener("click", e => {
-      const heart = document.createElement("div");
-      heart.textContent = "💗";
-      heart.className = "click-heart";
-      // Sử dụng pageX/Y thay vì clientX/Y để chính xác hơn
-      heart.style.left = e.pageX + "px";
-      heart.style.top = e.pageY + "px";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 1500);
-    });
+    // Đã XÓA Khối lệnh Tim bay khi click tại đây
   </script>
 
 </body>
