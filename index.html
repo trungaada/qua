@@ -18,6 +18,8 @@
       /* Nền hồng phấn nhẹ nhàng, tinh tế */
       background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%); 
       position: relative;
+      /* MỚI: Thêm Perspective cho hiệu ứng 3D */
+      perspective: 1000px; 
     }
 
     /* Hiệu ứng ánh sáng bokeh/glitter nhẹ nhàng hơn */
@@ -47,28 +49,50 @@
       100% { transform: translateY(0) scale(1); opacity: 0.5; }
     }
 
-    /* Nội dung chính */
+    /* Nội dung chính (CẬP NHẬT LỚN: Thêm đổ bóng và hoạt ảnh 3D) */
     .container {
       text-align: center;
       position: relative;
       z-index: 5;
-      padding: 20px; /* Thêm padding tổng thể cho màn hình nhỏ */
+      padding: 30px 40px; /* Tăng padding để đẹp hơn */
+      background-color: rgba(255, 255, 255, 0.85); /* Nền trắng mờ để nổi bật */
+      border-radius: 20px; /* Bo tròn góc */
+      /* Đổ bóng 3D: Bóng trung bình + Bóng màu hồng tinh tế */
+      box-shadow: 
+        0 8px 15px rgba(0, 0, 0, 0.15), 
+        0 15px 40px rgba(255, 105, 180, 0.5); 
+      /* Hoạt ảnh nổi nhẹ nhàng */
+      animation: containerPulse 5s infinite ease-in-out; 
     }
 
-    /* ICON LỚN TRÊN ĐẦU (MỚI) */
+    /* MỚI: Hoạt ảnh nhịp nhàng cho container */
+    @keyframes containerPulse {
+        0% { transform: scale(1) translateZ(0); }
+        50% { transform: scale(1.01) translateZ(10px); } /* Nổi nhẹ lên trong không gian 3D */
+        100% { transform: scale(1) translateZ(0); }
+    }
+
+    /* ICON LỚN TRÊN ĐẦU (ĐÃ CẬP NHẬT) */
     .main-icon {
         font-size: 80px;
         color: #ff3385;
         margin-bottom: 5px;
         text-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
-        animation: iconBeat 1.5s infinite alternate;
+        /* CẬP NHẬT: Thêm hoạt ảnh iconFloat */
+        animation: iconBeat 1.5s infinite alternate, iconFloat 4s infinite ease-in-out; 
     }
     @keyframes iconBeat {
         from { transform: scale(1); }
         to { transform: scale(1.1); }
     }
+    /* MỚI: Hoạt ảnh nổi nhẹ nhàng */
+    @keyframes iconFloat {
+        0% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-5px) scale(1.1); }
+        100% { transform: translateY(0) scale(1); }
+    }
     
-    /* Tiêu đề chính (Chữ nghiêng, hồng đậm như mẫu) */
+    /* Tiêu đề chính (ĐÃ CẬP NHẬT) */
     h1 {
       font-family: 'Playfair Display', serif; 
       font-size: 50px; /* Kích thước PC */
@@ -78,9 +102,17 @@
       font-weight: 700;
       font-style: italic; 
       text-shadow: 2px 2px 8px rgba(255, 51, 133, 0.6);
-      animation: textPulse 3s infinite ease-in-out;
+      /* CẬP NHẬT: Thêm hiệu ứng 3D nhẹ và hoạt ảnh titleTilt */
+      transform: rotateX(5deg) scale(1.02);
+      animation: textPulse 3s infinite ease-in-out, titleTilt 5s infinite alternate;
     }
     
+    /* MỚI: Hoạt ảnh nghiêng 3D nhẹ */
+    @keyframes titleTilt {
+        0% { transform: rotateX(5deg) scale(1.02); }
+        100% { transform: rotateX(-5deg) scale(1.02); }
+    }
+
     /* Chú thích nhỏ bên dưới */
     .note-text {
         font-family: 'Quicksand', sans-serif;
@@ -88,6 +120,21 @@
         color: #555;
         margin-bottom: 30px;
         font-weight: 500;
+        /* THÊM: Icon có màu hồng */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    /* THÊM: Icon nhỏ trong note-text */
+    .note-text span {
+        margin-right: 5px;
+        font-size: 20px;
+        color: #ff6699;
+        animation: noteIconGlow 1.5s infinite alternate;
+    }
+    @keyframes noteIconGlow {
+        from { text-shadow: 0 0 5px rgba(255, 105, 180, 0.5); }
+        to { text-shadow: 0 0 10px rgba(255, 105, 180, 0.8); }
     }
     
     @keyframes textPulse {
@@ -112,10 +159,13 @@
       overflow: hidden;
       font-weight: bold;
       letter-spacing: 1px;
+      /* MỚI: Đẩy nút ra phía trước trong không gian 3D */
+      transform: translateZ(5px); 
     }
 
     button:hover {
-      transform: translateY(-3px);
+      /* CẬP NHẬT: Nổi rõ hơn trong không gian 3D */
+      transform: translateY(-3px) translateZ(10px); 
       box-shadow: 0 10px 25px rgba(255, 51, 133, 0.8);
       background: linear-gradient(145deg, #ff6699, #ff99b3);
     }
@@ -158,12 +208,13 @@
       50% { transform: scale(1.5); opacity: 1; }
     }
 
-    /* Tim rơi & hoa bay */
+    /* Tim rơi & hoa bay (ĐÃ CẬP NHẬT) */
     .heart, .flower {
       position: fixed;
       pointer-events: none;
       z-index: 2;
-      animation-timing-function: linear;
+      /* CẬP NHẬT: Hoạt ảnh mượt mà hơn */
+      animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); 
       filter: drop-shadow(0 0 2px rgba(255, 105, 180, 0.5));
     }
 
@@ -182,6 +233,12 @@
         .main-icon {
             font-size: 60px;
         }
+      /* CẬP NHẬT: Điều chỉnh container trên mobile */
+      .container {
+        padding: 20px; 
+        max-width: 90%;
+        box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3); 
+      }
       h1 {
         font-size: 30px; 
         margin-bottom: 10px; 
@@ -197,9 +254,6 @@
         width: 80%; 
         max-width: 300px;
       }
-      .container {
-          padding: 10px; 
-      }
       .button-sub-text {
           font-size: 12px;
       }
@@ -212,7 +266,9 @@
   <div class="container">
     <div class="main-icon">❤️</div>
     <h1>Chúc mừng Ngày Phụ Nữ Việt Nam 20/10!</h1>
-    <div class="note-text">Món quà nhỏ bé chứa đựng cả tấm lòng. Hãy nhấn nút bên dưới để nhận nhé 💌</div>
+    <div class="note-text">
+        <span>💌</span> Món quà nhỏ bé chứa đựng cả tấm lòng. Hãy nhấn nút bên dưới để nhận nhé <span>🌟</span>
+    </div>
     
     <button onclick="location.href='qua20-10.html'">Nhận quà 💖</button>
     
