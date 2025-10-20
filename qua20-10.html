@@ -4,303 +4,636 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>💖 Món quà 20/10 💐</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
 <style>
 body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
-  font-family: 'Quicksand', sans-serif;
-  text-align: center;
-  overflow: hidden;
-  position: relative;
-  perspective: 1000px;
-  transition: opacity 700ms ease-in, transform 700ms ease-in;
-  opacity: 0;
-  transform: scale(0.95);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    perspective: 1000px;
+    transition: opacity 700ms ease-in, transform 700ms ease-in;
+    opacity: 0;
+    transform: scale(0.95);
 }
 body.fade-in {
-  opacity: 1;
-  transform: scale(1);
+    opacity: 1;
+    transform: scale(1);
 }
 
 /* Ô nhập tên */
 #name-input-container {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-  opacity: 1;
-  transform: translateY(0);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    opacity: 1;
+    transform: translateY(0);
+    z-index: 10;
 }
 #name-input-container.fade-out-name {
-  opacity: 0;
-  transform: translateY(-20px);
+    opacity: 0;
+    transform: translateY(-20px);
 }
 #input-wrapper {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-#name-input-container input,
-#name-input-container button {
-  padding: 10px 15px;
-  border-radius: 25px;
-  border: 2px solid #ff69b4;
-  font-size: 16px;
-  font-family: 'Quicksand', sans-serif;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
 }
 #name-input-container input {
-  width: 200px;
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 2px solid #ff69b4;
+    font-size: 16px;
+    font-family: 'Quicksand', sans-serif;
+    width: 200px;
+    transition: all 0.3s ease;
 }
 #name-input-container input:focus {
-  outline: none;
-  border-color: #ff1493;
-  box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
-  transform: scale(1.01);
-}
-#name-input-container button {
-  background-color: #ff69b4;
-  color: white;
-  cursor: pointer;
-  font-weight: 700;
-  width: 200px;
-  animation: subtleGlow 2s infinite alternate, subtleShake 5s infinite;
-  box-shadow: 0 4px 10px rgba(255,105,180,0.6);
-  position: relative;
-  overflow: visible;
-}
-#name-input-container button:hover {
-  background-color: #ff1493;
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 15px rgba(255,20,147,0.5);
-  animation: none;
+    outline: none;
+    border-color: #ff1493;
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+    transform: scale(1.01);
 }
 
-/* Hộp quà */
+/* 🌟 Nút “Nhận quà” nhấp nháy và run run */
+#name-input-container button {
+    background-color: #ff69b4;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    width: 200px;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    padding: 10px 15px;
+    font-family: 'Quicksand', sans-serif;
+    box-shadow: 0 0 15px rgba(255,105,180,0.7);
+    animation: pinkPulse 1.5s infinite alternate ease-in-out,
+                 softShake 4s infinite ease-in-out;
+    transition: all 0.3s ease;
+}
+#name-input-container button:hover {
+    background-color: #ff1493;
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(255,20,147,0.8);
+}
+
+/* 💗 Nhấp nháy nhẹ */
+@keyframes pinkPulse {
+    0% { box-shadow: 0 0 10px rgba(255,105,180,0.4); }
+    100% { box-shadow: 0 0 25px rgba(255,20,147,0.9); }
+}
+
+/* 💞 Run run nhẹ */
+@keyframes softShake {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-1px, 1px); }
+    50% { transform: translate(1px, -1px); }
+    75% { transform: translate(-1px, -1px); }
+}
+
+/* 🎁 Hộp quà */
 #gift-box {
-  width: 280px;
-  cursor: pointer;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 0.7s ease-in-out;
-  display: none;
-  border-radius: 10px;
-  box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+    width: 280px;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.7s ease-in-out;
+    display: none;
+    border-radius: 10px;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+    z-index: 5;
 }
 #gift-box.fade-in-gift {
-  opacity: 1;
-  transform: scale(1);
-  animation: pulse 2s infinite ease-in-out;
+    opacity: 1;
+    transform: scale(1);
+    animation: pulse 2s infinite ease-in-out;
 }
 @keyframes pulse {
-  0%{transform:scale(1);}
-  50%{transform:scale(1.05);}
-  100%{transform:scale(1);}
+    0%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(1);}
+}
+
+/* 💬 Gợi ý nhấn hộp quà */
+#note {
+    margin-top: 20px;
+    font-size: 17px;
+    color: #b80050;
+    font-weight: 600;
+    text-shadow: 0 0 6px rgba(255,105,180,0.6);
+    opacity: 0;
+    transition: opacity 1s ease-in;
+    z-index: 5;
+}
+#gift-box.fade-in-gift + #note {
+    opacity: 1;
 }
 
 /* 💌 THIỆP */
 #card {
-  display: none;
-  background: #fffafc;
-  border-radius: 25px;
-  border: 10px solid #f8bbd0;
-  box-shadow: 0 0 25px rgba(255,105,180,0.4);
-  padding: 35px 25px;
-  width: 80%;
-  max-width: 550px;
-  text-align: center;
-  opacity: 0;
-  transform: scale(0.9);
-  position: relative;
-  z-index: 10;
-  margin: 20px auto;
+    display: none;
+    background: #fffafc;
+    border-radius: 25px;
+    border: 10px solid #f8bbd0;
+    box-shadow: 0 0 25px rgba(255,105,180,0.4);
+    padding: 35px 25px;
+    width: 80%;
+    max-width: 550px;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.9) rotateY(30deg);
+    position: relative;
+    z-index: 10;
+    margin: 20px auto;
 }
 #card.show {
-  display: block;
-  animation: cardSlideIn 1.2s ease forwards;
+    display: block;
+    animation: cardSlideIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 @keyframes cardSlideIn {
-  from { transform: translateY(30px) scale(0.9); opacity: 0; }
-  to { transform: translateY(0) scale(1); opacity: 1; }
-}
-#card h1 {
-  color: #b80050;
-  font-family: 'Playfair Display', serif;
-  font-size: 38px;
-  margin: 10px 0 15px 0;
+    from { transform: translateY(30px) scale(0.8) rotateY(-90deg); opacity: 0; }
+    to { transform: translateY(0) scale(1) rotateY(0deg); opacity: 1; }
 }
 
-/* 🌟 GIF DỄ THƯƠNG */
+#card h1 {
+    color: #b80050;
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    margin: 10px 0 15px 0;
+}
+
+/* 🌟 GIF DỄ THƯƠNG (Cập nhật: Viền mềm mại hơn) */
 .gif-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px 0 20px 0;
-  animation: fadeInGif 1.5s ease-in-out forwards;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 20px 0;
+    animation: fadeInGif 1.5s ease-in-out forwards;
 }
 .card-gif {
-  width: 120px;
-  height: auto;
-  border-radius: 18px;
-  box-shadow: 0 0 12px rgba(255,105,180,0.4);
-  animation: gifFloat 3s ease-in-out infinite;
+    width: 120px;
+    height: auto;
+    /* THAY ĐỔI: Tăng độ bo tròn và thêm viền hồng nhẹ */
+    border-radius: 25px;
+    border: 3px solid #ffc0cb; 
+    box-shadow: 0 0 15px rgba(255,105,180,0.6);
+    animation: gifFloat 3s ease-in-out infinite;
 }
 @keyframes gifFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
 }
 @keyframes fadeInGif {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 #card p {
-  font-size: 16px;
-  color: #333;
-  line-height: 1.7;
-  font-family: 'Quicksand', sans-serif;
-  width: 90%;
-  margin: 0 auto;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.7;
+    width: 90%;
+    margin: 0 auto;
+    text-align: left; /* Căn lề trái cho dễ đọc */
 }
-#card p strong {
-  color: #ff3385;
+#card p strong { color: #ff3385; }
+
+/* THAY ĐỔI: Dùng CSS cơ bản cho dòng chữ thay vì animation lineUp */
+.line { 
+    display: block; 
+    margin-bottom: 12px; 
+    min-height: 18px; /* Giữ khoảng cách khi chưa có nội dung */
 }
-.line {
-  opacity: 0;
-  transform: translateY(15px);
-  display: block;
-  margin-bottom: 12px;
-}
-.line.show {
-  animation: lineUp 1s forwards;
-}
-@keyframes lineUp {
-  to { opacity: 1; transform: translateY(0); }
-}
+
+/* ✨ THÊM HIỆU ỨNG TEXT GLOW CHO CHỮ KÝ */
 .signature {
-  margin-top: 25px;
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  color: #b80050;
+    margin-top: 25px;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #b80050;
+    animation: textGlow 2s infinite alternate ease-in-out;
 }
+@keyframes textGlow {
+    0% { text-shadow: 0 0 5px rgba(255, 105, 180, 0.5); }
+    100% { text-shadow: 0 0 10px rgba(255, 51, 133, 0.8), 0 0 20px rgba(255, 150, 200, 0.3); }
+}
+
 
 /* Trang trí */
 .deco-flower {
-  position: absolute;
-  font-size: 25px;
-  color: #ff80ab;
-  opacity: 0;
-  animation: decoAppear 2s ease-out forwards;
+    position: absolute;
+    font-size: 25px;
+    color: #ff80ab;
+    opacity: 0;
+    animation: decoAppear 2s ease-out forwards;
 }
 @keyframes decoAppear {
-  0%{opacity:0;transform:scale(0.5) rotate(0deg);}
-  100%{opacity:1;transform:scale(1) rotate(10deg);}
+    0%{opacity:0;transform:scale(0.5) rotate(0deg);}
+    100%{opacity:1;transform:scale(1) rotate(10deg);}
 }
 #deco-tl{top:10px;left:10px;}
 #deco-tr{top:10px;right:10px;}
 #deco-bl{bottom:10px;left:10px;}
 #deco-br{bottom:10px;right:10px;}
 
+/* 🎊 HIỆU ỨNG CONFETTI (Lấp lánh) 🎊 */
+.confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ffc0cb;
+    opacity: 0;
+    border-radius: 50%;
+    animation: fall 3s infinite;
+    pointer-events: none;
+    z-index: 100;
+}
+.confetti-piece:nth-child(even) { background: #ffe5b4; }
+.confetti-piece:nth-child(3n) {
+    background: #b0e0e6;
+    width: 5px;
+    height: 15px;
+    border-radius: 2px;
+}
+/* THÊM infinite VÀO animation trong CSS để confetti liên tục rơi */
+@keyframes fall {
+    0% { transform: translate3d(0, -100px, 0) rotate(0deg); opacity: 1; }
+    100% { transform: translate3d(0, 100vh, 0) rotate(720deg); opacity: 0.5; }
+}
+
+/* ❤️ HIỆU ỨNG TRÁI TIM RƠI TỪ TRÊN XUỐNG (Nền) - ĐÃ TỐI ƯU HÓA: KHÔNG CẦN 'forwards' và thêm 'infinite' vào CSS */
+.heart-fall {
+    position: absolute;
+    font-size: 25px;
+    color: #ff3385;
+    opacity: 0;
+    /* THAY ĐỔI: Thêm infinite để không cần tạo mới liên tục */
+    animation: heartFall 8s linear infinite; 
+    pointer-events: none;
+    z-index: 0;
+    text-shadow: 0 0 5px rgba(255,51,133,0.5);
+}
+
+@keyframes heartFall {
+    0% {
+        transform: translate(var(--x, 0px), -10vh) scale(0.5);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(var(--x, 0px), 100vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* 💥 HIỆU ỨNG TRÁI TIM BẬT LÊN KHI CLICK (ĐA MÀU) 💥 */
+.click-heart {
+    position: fixed; 
+    font-size: 30px;
+    animation: popUpHeart 1s ease-out forwards;
+    pointer-events: none;
+    z-index: 101; 
+    user-select: none;
+    transform: translate(-50%, -50%); 
+}
+
+/* Định nghĩa màu sắc cho trái tim click */
+.click-heart.pink { color: #ff1493; text-shadow: 0 0 8px rgba(255,20,147,0.7); }
+.click-heart.red { color: #e91e63; text-shadow: 0 0 8px rgba(233,30,99,0.7); }
+.click-heart.purple { color: #9c27b0; text-shadow: 0 0 8px rgba(156,39,176,0.7); }
+.click-heart.orange { color: #ff9800; text-shadow: 0 0 8px rgba(255,152,0,0.7); }
+.click-heart.yellow { color: #ffeb3b; text-shadow: 0 0 8px rgba(255,235,59,0.7); }
+
+@keyframes popUpHeart {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -100%) scale(1.2);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translate(-50%, -200%) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* ✨ HIỆU ỨNG LẤP LÁNH CHO THIỆP ✨ */
+.card-sparkle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #ffd700; /* Vàng lấp lánh */
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    animation: sparkleFadeOut 2s ease-out forwards;
+    box-shadow: 0 0 5px #ffd700, 0 0 10px #ffcc00;
+}
+
+@keyframes sparkleFadeOut {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+
 /* Mobile */
 @media (max-width:600px) {
-  #card { padding: 25px 15px; width: 95%; border-width: 8px; }
-  #card h1 { font-size: 28px; }
-  #card p { font-size: 14px; }
-  .signature { font-size: 18px; }
-  .card-gif { width: 100px; }
+    #card { padding: 25px 15px; width: 95%; border-width: 8px; }
+    #card h1 { font-size: 28px; }
+    #card p { font-size: 14px; }
+    .signature { font-size: 18px; }
+    .card-gif { width: 100px; }
 }
 </style>
 </head>
 <body>
 
+<audio id="bg-music" loop>
+    <source src="background_music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<audio id="open-sound">
+    <source src="gift_open_sound.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
 <div id="name-input-container">
-  <div id="input-wrapper">
-    <input type="text" id="recipient-name" placeholder="Nhập tên">
-  </div>
-  <button id="start-btn">🎁 Nhận quà</button>
+    <div id="input-wrapper">
+        <input type="text" id="recipient-name" placeholder="Nhập tên">
+    </div>
+    <button id="start-btn">🎁 Nhận quà</button>
 </div>
 
 <img id="gift-box" src="1.jpg" alt="Hộp quà">
 <div id="note">💬 Nhấn vào hộp quà để mở nhé 💖</div>
 
 <div id="card">
-  <div class="deco-flower" id="deco-tl">🌸</div>
-  <div class="deco-flower" id="deco-tr">🌸</div>
-  <div class="deco-flower" id="deco-bl">🌸</div>
-  <div class="deco-flower" id="deco-br">🌸</div>
+    <div class="deco-flower" id="deco-tl">🌸</div>
+    <div class="deco-flower" id="deco-tr">🌸</div>
+    <div class="deco-flower" id="deco-bl">🌸</div>
+    <div class="deco-flower" id="deco-br">🌸</div>
 
-  <h1>🌷💖 Chúc Mừng 20/10 💐🌸</h1>
+    <h1>🌷💖 Chúc Mừng 20/10 💐🌸</h1>
 
-  <div class="gif-container">
-    <img src="giphyabc.gif" alt="Ảnh gif dễ thương" class="card-gif">
-  </div>
+    <div class="gif-container">
+        <img src="giphyabc.gif" alt="Ảnh gif dễ thương" class="card-gif">
+    </div>
 
-  <p>
-    <span class="line">Thân gửi **[name]** yêu quý!</span>
-    <span class="line">Tặng những bông hoa rực rỡ nhất cho người phụ nữ tuyệt vời nhất! 💐🌷</span>
-    <span class="line">🌹 Nhân ngày 20/10, xin gửi lời chúc tốt đẹp nhất tới **[name]**.</span>
-    <span class="line">🌸 Chúc **[name]** luôn vui vẻ, khỏe mạnh, trẻ trung và xinh đẹp. 🌸</span>
-    <span class="line">✨ Chúc **[name]** gặt hái nhiều thành công và luôn hạnh phúc. ✨</span>
-    <span class="line">💖 Mong nụ cười rạng rỡ luôn nở trên môi **[name]** mỗi ngày.</span>
-    <span class="line">🎁 Hãy tận hưởng ngày đặc biệt này thật trọn vẹn nhé!</span>
-    <span class="line">💕 Chúc **[name]** học giỏi, và mãi là cô gái tuyệt vời của 12A11!</span>
-    <span class="line">💐 Chúc **[name]** có một ngày 20/10 thật ý nghĩa và ngập tràn niềm vui bên những người thân yêu! 💐</span>
-  </p>
+    <p>
+        <span class="line" data-text="Thân gửi **[name]** yêu quý!"></span>
+        <span class="line" data-text="Tặng những bông hoa rực rỡ nhất cho người phụ nữ tuyệt vời nhất! 💐🌷"></span>
+        <span class="line" data-text="🌹 Nhân ngày 20/10, xin gửi lời chúc tốt đẹp nhất tới **[name]**."></span>
+        <span class="line" data-text="🌸 Chúc **[name]** luôn vui vẻ, khỏe mạnh, trẻ trung và xinh đẹp. 🌸"></span>
+        <span class="line" data-text="✨ Chúc **[name]** gặt hái nhiều thành công và luôn hạnh phúc. ✨"></span>
+        <span class="line" data-text="💖 Mong nụ cười rạng rỡ luôn nở trên môi **[name]** mỗi ngày."></span>
+        <span class="line" data-text="🎁 Hãy tận hưởng ngày đặc biệt này thật trọn vẹn nhé!"></span>
+        <span class="line" data-text="💕 Chúc **[name]** học giỏi, và mãi là cô gái tuyệt vời của 12A11!"></span>
+        <span class="line" data-text="💐 Chúc **[name]** có một ngày 20/10 thật ý nghĩa và ngập tràn niềm vui bên những người thân yêu! 💐"></span>
+    </p>
 
-  <div class="signature">Tập thể nam sinh 12A11 gửi tặng</div>
+    <div class="signature">Tập thể nam sinh 12A11 gửi tặng</div>
 </div>
 
 <script>
-const giftBox=document.getElementById('gift-box');
-const card=document.getElementById('card');
-const note=document.getElementById('note');
-const lines=document.querySelectorAll('.line');
-const nameInputContainer=document.getElementById('name-input-container');
-const recipientNameInput=document.getElementById('recipient-name');
-const startBtn=document.getElementById('start-btn');
+const giftBox = document.getElementById('gift-box');
+const card = document.getElementById('card');
+const note = document.getElementById('note');
+const lines = Array.from(document.querySelectorAll('.line')).filter(el => el.hasAttribute('data-text'));
+const nameInputContainer = document.getElementById('name-input-container');
+const recipientNameInput = document.getElementById('recipient-name');
+const startBtn = document.getElementById('start-btn');
+const bgMusic = document.getElementById('bg-music');
+const openSound = document.getElementById('open-sound');
+const heartColors = ['pink', 'red', 'purple', 'orange', 'yellow']; 
 
-document.addEventListener('DOMContentLoaded',()=>{document.body.classList.add('fade-in');});
-const isMobile=window.innerWidth<=600;
+// Tối ưu hóa: Giới hạn tốc độ tạo trái tim khi click
+let lastClickTime = 0;
+const clickThrottle = 100; // 100ms: Chỉ cho phép tạo 1 trái tim mỗi 100ms
 
-startBtn.addEventListener('click',()=>{
-  const name=recipientNameInput.value.trim().replace(/[<>]/g,"");
-  if(!name){alert("Vui lòng nhập tên người nhận! 💖");return;}
-  lines.forEach(line=>{
-    let content=line.innerHTML;
-    content=content.replace(/\*\*\[name\]\*\*/g,`<strong>${name}</strong>`);
-    content=content.replace(/\[name\]/g,`<strong>${name}</strong>`);
-    line.innerHTML=content;
-  });
-  nameInputContainer.classList.add("fade-out-name");
-  setTimeout(()=>{
-    nameInputContainer.style.display="none";
-    giftBox.style.display="block";
-    setTimeout(()=>giftBox.classList.add("fade-in-gift"),10);
-    note.textContent=`💬 Nhấn vào hộp quà để mở, ${name} 💖`;
-  },500);
+// Hiệu ứng gõ chữ, giữ nguyên <strong>
+function typeLine(element, htmlText, delay = 55) { // Tăng delay lên 55ms
+    return new Promise(resolve => {
+        element.innerHTML = '';
+        let i = 0;
+
+        // Tạo DOM tạm để xử lý strong
+        const temp = document.createElement('div');
+        temp.innerHTML = htmlText;
+
+        const nodes = Array.from(temp.childNodes); // Node: text hoặc <strong>
+
+        function typeNode(index = 0, charIndex = 0) {
+            if (index >= nodes.length) {
+                resolve();
+                return;
+            }
+
+            const node = nodes[index];
+            if (node.nodeType === Node.TEXT_NODE) {
+                element.innerHTML += node.textContent.charAt(charIndex);
+                charIndex++;
+                if (charIndex < node.textContent.length) {
+                    const nextDelay = (node.textContent.charAt(charIndex-1).match(/[.!?]/)) ? delay*8 : delay;
+                    setTimeout(() => typeNode(index, charIndex), nextDelay);
+                } else {
+                    typeNode(index + 1, 0);
+                }
+            } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'STRONG') {
+                // Gõ trong strong
+                const strongEl = document.createElement('strong');
+                element.appendChild(strongEl);
+                function typeStrong(charIdx = 0) {
+                    strongEl.textContent += node.textContent.charAt(charIdx);
+                    charIdx++;
+                    if (charIdx < node.textContent.length) {
+                        const nextDelay = (node.textContent.charAt(charIdx-1).match(/[.!?]/)) ? delay*8 : delay;
+                        setTimeout(() => typeStrong(charIdx), nextDelay);
+                    } else {
+                        typeNode(index + 1, 0);
+                    }
+                }
+                typeStrong();
+            }
+        }
+
+        typeNode();
+    });
+}
+
+
+// Trái tim click
+function createClickHeart(x, y) {
+    const heart = document.createElement('span');
+    heart.classList.add('click-heart');
+    const randomColor = heartColors[Math.floor(Math.random() * heartColors.length)];
+    heart.classList.add(randomColor);
+    heart.innerHTML = '💖';
+    heart.style.left = `${x}px`;
+    heart.style.top = `${y}px`;
+    document.body.appendChild(heart);
+    heart.addEventListener('animationend', () => heart.remove());
+}
+
+// Lấp lánh trên thiệp
+function createCardSparkles() {
+    const numSparkles = 15; 
+    const cardRect = card.getBoundingClientRect();
+    for (let i = 0; i < numSparkles; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('card-sparkle');
+        const randX = Math.random() * (cardRect.width + 100) - 50; 
+        const randY = Math.random() * (cardRect.height + 100) - 50;
+        sparkle.style.left = `${cardRect.left + randX}px`;
+        sparkle.style.top = `${cardRect.top + randY}px`;
+        sparkle.style.animationDelay = `${Math.random() * 0.8}s`; 
+        document.body.appendChild(sparkle);
+        sparkle.addEventListener('animationend', () => sparkle.remove());
+    }
+}
+
+// Nút Nhận quà
+function handleStartButtonClick(event) {
+    const name = recipientNameInput.value.trim().replace(/[<>]/g, "");
+    if (!name) {
+        alert("Vui lòng nhập tên người nhận! 💖");
+        // Vẫn tạo trái tim khi click vào nút "Nhận quà"
+        if (event.clientX && event.clientY) createClickHeart(event.clientX, event.clientY);
+        else if (event.touches) createClickHeart(event.touches[0].clientX, event.touches[0].clientY);
+        return;
+    }
+
+    // Hiệu ứng trái tim
+    const rect = startBtn.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    [0, 100, 200].forEach(t => setTimeout(() => createClickHeart(centerX, centerY), t));
+
+    // Thay [name] bằng tên người nhập
+    lines.forEach(line => {
+        let content = line.getAttribute('data-text');
+        content = content.replace(/\*\*\[name\]\*\*/g, `**${name}**`).replace(/\[name\]/g, `**${name}**`);
+        line.setAttribute('data-text', content);
+        line.innerHTML = '';
+    });
+
+    nameInputContainer.classList.add("fade-out-name");
+    if (bgMusic.paused) bgMusic.play().catch(() => {});
+    setTimeout(() => {
+        nameInputContainer.style.display = "none";
+        giftBox.style.display = "block";
+        setTimeout(() => giftBox.classList.add("fade-in-gift"), 10);
+        note.textContent = `💬 Nhấn vào hộp quà để mở, ${name} 💖`;
+    }, 500);
+}
+
+// Hiển thị thiệp và gõ chữ
+async function showCardContent() {
+    createCardSparkles();
+    // Tối ưu hóa: Delay confetti để giảm tải lúc mở thiệp
+    setTimeout(createConfetti, 500);
+    for (const line of lines) {
+        const htmlText = line.getAttribute('data-text').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        // Dùng delay mặc định 55ms đã tối ưu ở trên
+        await typeLine(line, htmlText); 
+        await new Promise(resolve => setTimeout(resolve, 600));
+    }
+}
+
+startBtn.addEventListener('click', handleStartButtonClick);
+startBtn.addEventListener('touchstart', handleStartButtonClick);
+
+// Tối ưu hóa: Thêm Throttle (giới hạn tốc độ) cho hiệu ứng trái tim click
+document.addEventListener('click', e => {
+    const now = Date.now();
+    if (e.target !== startBtn && e.target !== giftBox && e.target !== recipientNameInput && now - lastClickTime > clickThrottle) {
+        createClickHeart(e.clientX, e.clientY);
+        lastClickTime = now;
+    }
+});
+document.addEventListener('touchstart', e => {
+    const now = Date.now();
+    if (e.target !== startBtn && e.target !== giftBox && e.target !== recipientNameInput && now - lastClickTime > clickThrottle) {
+        createClickHeart(e.touches[0].clientX, e.touches[0].clientY);
+        lastClickTime = now;
+    }
+}, { passive: false });
+
+// Tối ưu hóa Confetti: Giảm số lượng
+function createConfetti() {
+    // Giảm số lượng từ 30 xuống 15
+    for (let i = 0; i < 15; i++) {
+        const piece = document.createElement('div');
+        piece.classList.add('confetti-piece');
+        piece.style.left = `${Math.random() * 100}vw`;
+        piece.style.width = `${5 + Math.random() * 10}px`;
+        piece.style.height = `${5 + Math.random() * 15}px`;
+        piece.style.animationDelay = `${-Math.random() * 4}s`;
+        piece.style.animationDuration = `${3 + Math.random() * 2}s`;
+        document.body.appendChild(piece);
+        // BỎ animationend listener vì ta muốn nó lặp lại theo CSS
+    }
+}
+
+// Tối ưu hóa Heart Rain: Tạo số lượng cố định, không cần setInterval
+function createInitialHearts(count) {
+    for(let i = 0; i < count; i++) {
+        const heart = document.createElement('span');
+        heart.classList.add('heart-fall');
+        heart.innerHTML = '❤️';
+        heart.style.left = `${Math.random() * window.innerWidth}px`; 
+        // Dùng delay âm để animation bắt đầu so le ngay lập tức
+        heart.style.animationDelay = `${-Math.random() * 6}s`; 
+        heart.style.animationDuration = `${8 + Math.random() * 4}s`; // Tăng thời gian rơi (tối ưu hiệu suất)
+        // Giảm độ lắc ngang (từ 200px xuống 150px)
+        heart.style.setProperty('--x', `${(Math.random() - 0.5) * 150}px`); 
+        document.body.appendChild(heart);
+        // BỎ heart.addEventListener('animationend', () => heart.remove()); vì animation đã chạy vô hạn
+    }
+}
+
+function startHeartRain() {
+    // Tối ưu hóa: Chỉ tạo 20 trái tim cố định
+    createInitialHearts(20); 
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('fade-in');
+    document.body.addEventListener('click', () => {
+        if (bgMusic.paused) bgMusic.play().catch(() => {});
+    }, { once: true });
+    // Bắt đầu mưa tim cố định (đã tối ưu)
+    startHeartRain(); 
 });
 
-giftBox.addEventListener('click',()=>{
-  note.style.display="none";
-  giftBox.src="2.png";
-  giftBox.style.cursor="default";
-  setTimeout(()=>{
-    giftBox.style.display="none";
-    card.classList.add("show");
-    lines.forEach((line,i)=>setTimeout(()=>line.classList.add('show'),500+i*400));
-  },800);
+giftBox.addEventListener('click', () => {
+    note.style.display = "none";
+    giftBox.src = "2.png";
+    giftBox.style.cursor = "default";
+    openSound.play().catch(() => {});
+    setTimeout(() => {
+        giftBox.style.display = "none";
+        card.classList.add("show");
+        showCardContent();
+    }, 800);
 });
 </script>
+
 </body>
 </html>
-
