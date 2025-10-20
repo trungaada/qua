@@ -29,7 +29,7 @@ body.fade-in {
   transform: scale(1);
 }
 
-/* INPUT */
+/* Ô nhập tên */
 #name-input-container {
   margin-bottom: 20px;
   display: flex;
@@ -79,60 +79,16 @@ body.fade-in {
   position: relative;
   overflow: visible;
 }
-#name-input-container button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ff69b4;
-  border-radius: 25px;
-  z-index: -1;
-  animation: ripplePulse 2s infinite cubic-bezier(0.66, 0.0, 0.34, 1.0);
-  opacity: 0;
-}
 #name-input-container button:hover {
   background-color: #ff1493;
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 8px 15px rgba(255,20,147,0.5);
   animation: none;
 }
-#name-input-container button:active {
-  background-color: #880e4f;
-  transform: translateY(0px) scale(0.98);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-  transition: all 0.1s ease;
-}
-@keyframes subtleGlow {
-  from { box-shadow: 0 4px 10px rgba(255,105,180,0.6); }
-  to { box-shadow: 0 4px 15px rgba(255,105,180,0.9); }
-}
-@keyframes subtleShake {
-  0%,100%{transform:translateX(0);}
-  25%{transform:translateX(-0.5px);}
-  75%{transform:translateX(0.5px);}
-}
-@keyframes ripplePulse {
-  0%{transform:scale(1);opacity:0.75;}
-  100%{transform:scale(1.5);opacity:0;}
-}
 
-/* NOTE + GIFT */
-#note {
-  color: #880e4f;
-  font-size: 20px;
-  font-weight: 700;
-  margin-top: 25px;
-  animation: glowText 2.5s ease-in-out infinite alternate;
-  text-shadow: 0 0 6px rgba(255,182,193,0.7);
-}
-@keyframes glowText {
-  from {opacity:0.7; transform:scale(1);}
-  to {opacity:1; transform:scale(1.02);}
-}
+/* Hộp quà */
 #gift-box {
-  width: 300px;
+  width: 280px;
   cursor: pointer;
   opacity: 0;
   transform: scale(0.8);
@@ -152,70 +108,98 @@ body.fade-in {
   100%{transform:scale(1);}
 }
 
-/* CARD */
+/* 💌 THIỆP */
 #card {
   display: none;
-  background: #fffcf8;
+  background: #fffafc;
   border-radius: 25px;
-  border: 12px solid #fce4ec;
+  border: 10px solid #f8bbd0;
   box-shadow: 0 0 25px rgba(255,105,180,0.4);
-  padding: 50px;
-  width: 85%;
-  max-width: 650px;
+  padding: 35px 25px;
+  width: 80%;
+  max-width: 550px;
   text-align: center;
   opacity: 0;
-  transform: scale(0.8);
+  transform: scale(0.9);
   position: relative;
   z-index: 10;
+  margin: 20px auto;
 }
 #card.show {
   display: block;
-  animation: cardSlideIn 1.2s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
+  animation: cardSlideIn 1.2s ease forwards;
 }
 @keyframes cardSlideIn {
-  0% {transform:translateY(30vh) scale(0.8); opacity:0;}
-  100% {transform:translateY(0) scale(1); opacity:1;}
+  from { transform: translateY(30px) scale(0.9); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
 }
 #card h1 {
-  color:#b80050;
-  font-family:'Playfair Display', serif;
-  font-size:45px;
-  margin:10px 0 20px 0;
+  color: #b80050;
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  margin: 10px 0 15px 0;
 }
+
+/* 🌟 GIF DỄ THƯƠNG */
+.gif-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0 20px 0;
+  animation: fadeInGif 1.5s ease-in-out forwards;
+}
+.card-gif {
+  width: 120px;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 0 12px rgba(255,105,180,0.4);
+  animation: gifFloat 3s ease-in-out infinite;
+}
+@keyframes gifFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes fadeInGif {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 #card p {
-  font-size:18px;
-  color:#111;
-  line-height:1.6;
-  font-family:'Quicksand', sans-serif;
-  width:90%;
-  margin:0 auto;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.7;
+  font-family: 'Quicksand', sans-serif;
+  width: 90%;
+  margin: 0 auto;
 }
-#card p strong {color:#ff3385;}
+#card p strong {
+  color: #ff3385;
+}
 .line {
-  opacity:0;
-  transform:translateY(15px);
-  display:block;
-  margin-bottom:12px;
+  opacity: 0;
+  transform: translateY(15px);
+  display: block;
+  margin-bottom: 12px;
 }
 .line.show {
   animation: lineUp 1s forwards;
 }
 @keyframes lineUp {
-  to {opacity:1; transform:translateY(0);}
+  to { opacity: 1; transform: translateY(0); }
 }
 .signature {
-  margin-top:30px;
-  font-family:'Playfair Display', serif;
-  font-size:28px;
-  color:#b80050;
+  margin-top: 25px;
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: #b80050;
 }
 
-/* DECOR */
+/* Trang trí */
 .deco-flower {
-  position:absolute;
-  font-size:25px;
-  color:#ff80ab;
-  opacity:0;
+  position: absolute;
+  font-size: 25px;
+  color: #ff80ab;
+  opacity: 0;
   animation: decoAppear 2s ease-out forwards;
 }
 @keyframes decoAppear {
@@ -227,49 +211,13 @@ body.fade-in {
 #deco-bl{bottom:10px;left:10px;}
 #deco-br{bottom:10px;right:10px;}
 
-/* HEARTS */
-.falling-heart {
-  position: fixed;
-  top: -10px;
-  pointer-events:none;
-  animation: fall 6s linear forwards;
-  z-index:1;
-  opacity:0.8;
-}
-@keyframes fall {
-  0% {transform:translateY(0) rotate(0deg);opacity:0.8;}
-  100% {transform:translateY(110vh) rotate(360deg);opacity:0;}
-}
-.click-heart {
-  position: fixed;
-  animation: floatUp 1.5s ease-out forwards;
-  font-size:28px;
-  pointer-events:none;
-}
-@keyframes floatUp {
-  0% {transform:translateY(0) scale(1);opacity:1;}
-  100% {transform:translateY(-100px) scale(2);opacity:0;}
-}
-.confetti {
-  position: fixed;
-  width: 6px;
-  height: 6px;
-  border-radius:50%;
-  opacity:0.9;
-  animation: confetti-fall 3s ease-out forwards;
-  z-index:20;
-}
-@keyframes confetti-fall {
-  0% {transform:translateY(0) rotate(0);opacity:1;}
-  100% {transform:translateY(100vh) rotate(720deg);opacity:0;}
-}
-@media(max-width:600px){
-  #card{border:8px solid #fce4ec;padding:25px 15px;width:95%;}
-  #gift-box{width:250px;}
-  #note{font-size:16px;}
-  #card h1{font-size:30px;}
-  #card p{font-size:14px;}
-  .signature{font-size:20px;}
+/* Mobile */
+@media (max-width:600px) {
+  #card { padding: 25px 15px; width: 95%; border-width: 8px; }
+  #card h1 { font-size: 28px; }
+  #card p { font-size: 14px; }
+  .signature { font-size: 18px; }
+  .card-gif { width: 100px; }
 }
 </style>
 </head>
@@ -292,19 +240,23 @@ body.fade-in {
   <div class="deco-flower" id="deco-br">🌸</div>
 
   <h1>🌷💖 Chúc Mừng 20/10 💐🌸</h1>
-  <<p>
-  <span class="line">Thân gửi **[name]** yêu quý!</span>
-  <span class="line">Tặng những bông hoa rực rỡ nhất cho người phụ nữ tuyệt vời nhất! 💐🌷</span>
-  <span class="line">🌹 Nhân ngày 20/10, xin gửi lời chúc tốt đẹp nhất tới **[name]**.</span>
-  <span class="line">🌸 Chúc **[name]** luôn vui vẻ, khỏe mạnh, trẻ trung và xinh đẹp. 🌸</span>
-  
-  <span class="line">✨ Chúc **[name]** gặt hái nhiều thành công và luôn hạnh phúc. ✨</span>
-  <span class="line">💖 Mong nụ cười rạng rỡ luôn nở trên môi **[name]** mỗi ngày.</span>
 
-  <span class="line">🎁 Hãy tận hưởng ngày đặc biệt này thật trọn vẹn nhé!</span>
-  <span class="line">💕 Chúc **[name]** học giỏi, và mãi là cô gái tuyệt vời của 12A11!</span>
-  <span class="line">💐 Chúc **[name]** có một ngày 20/10 thật ý nghĩa và ngập tràn niềm vui bên những người thân yêu! 💐</span>
-</p>
+  <div class="gif-container">
+    <img src="giphyabc.gif" alt="Ảnh gif dễ thương" class="card-gif">
+  </div>
+
+  <p>
+    <span class="line">Thân gửi **[name]** yêu quý!</span>
+    <span class="line">Tặng những bông hoa rực rỡ nhất cho người phụ nữ tuyệt vời nhất! 💐🌷</span>
+    <span class="line">🌹 Nhân ngày 20/10, xin gửi lời chúc tốt đẹp nhất tới **[name]**.</span>
+    <span class="line">🌸 Chúc **[name]** luôn vui vẻ, khỏe mạnh, trẻ trung và xinh đẹp. 🌸</span>
+    <span class="line">✨ Chúc **[name]** gặt hái nhiều thành công và luôn hạnh phúc. ✨</span>
+    <span class="line">💖 Mong nụ cười rạng rỡ luôn nở trên môi **[name]** mỗi ngày.</span>
+    <span class="line">🎁 Hãy tận hưởng ngày đặc biệt này thật trọn vẹn nhé!</span>
+    <span class="line">💕 Chúc **[name]** học giỏi, và mãi là cô gái tuyệt vời của 12A11!</span>
+    <span class="line">💐 Chúc **[name]** có một ngày 20/10 thật ý nghĩa và ngập tràn niềm vui bên những người thân yêu! 💐</span>
+  </p>
+
   <div class="signature">Tập thể nam sinh 12A11 gửi tặng</div>
 </div>
 
@@ -342,46 +294,11 @@ giftBox.addEventListener('click',()=>{
   note.style.display="none";
   giftBox.src="2.png";
   giftBox.style.cursor="default";
-  const numConfetti=isMobile?2:5;
-  for(let i=0;i<numConfetti;i++){
-    const conf=document.createElement("div");
-    conf.classList.add("confetti");
-    conf.style.left=Math.random()*100+"vw";
-    conf.style.backgroundColor=["#ff4da6","#ffb6c1","#ffd700","#66ccff","#ff66ff"][Math.floor(Math.random()*5)];
-    document.body.appendChild(conf);
-    setTimeout(()=>conf.remove(),2500);
-  }
-  giftBox.classList.add("fade-out");
   setTimeout(()=>{
     giftBox.style.display="none";
     card.classList.add("show");
     lines.forEach((line,i)=>setTimeout(()=>line.classList.add('show'),500+i*400));
   },800);
-});
-
-function startBackgroundEffects(){
-  const icons=['💖','🌸'];
-  const interval=isMobile?3000:1500;
-  setInterval(()=>{
-    const icon=document.createElement("div");
-    icon.textContent=icons[Math.floor(Math.random()*icons.length)];
-    icon.style.left=Math.random()*100+"vw";
-    icon.classList.add("falling-heart");
-    icon.style.fontSize=(isMobile?Math.random()*4+10:Math.random()*6+12)+"px";
-    document.body.appendChild(icon);
-    setTimeout(()=>icon.remove(),6000);
-  },interval);
-}
-startBackgroundEffects();
-
-document.addEventListener("click",e=>{
-  const heart=document.createElement("div");
-  heart.textContent="💗";
-  heart.className="click-heart";
-  heart.style.left=e.clientX+"px";
-  heart.style.top=e.clientY+"px";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),1000);
 });
 </script>
 </body>
