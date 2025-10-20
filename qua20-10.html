@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <title>💖 Món quà 20/10 💐</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
 <style>
 body {
     margin: 0;
@@ -14,9 +14,9 @@ body {
     align-items: center;
     flex-direction: column;
     background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
-    /* CẬP NHẬT: Thêm font-weight 700 cho nội dung chính */
+    /* Giữ Quicksand là font mặc định cho Body và Input/Button */
     font-family: 'Quicksand', sans-serif; 
-    font-weight: 400; /* Mặc định cho body */
+    font-weight: 400; 
     text-align: center;
     overflow: hidden;
     position: relative;
@@ -56,7 +56,6 @@ body.fade-in {
     padding: 10px 15px;
     border-radius: 25px;
     border: 2px solid #ff69b4;
-    /* CẬP NHẬT: Tăng font-size nhẹ */
     font-size: 17px; 
     font-family: 'Quicksand', sans-serif;
     width: 200px;
@@ -80,7 +79,6 @@ body.fade-in {
     outline: none;
     border-radius: 25px;
     padding: 10px 15px;
-    /* CẬP NHẬT: Tăng font-size nhẹ */
     font-size: 17px; 
     font-family: 'Quicksand', sans-serif;
     box-shadow: 0 0 15px rgba(255,105,180,0.7);
@@ -132,10 +130,9 @@ body.fade-in {
 /* Gợi ý nhấn hộp quà */
 #note {
     margin-top: 20px;
-    /* CẬP NHẬT: Tăng font-size nhẹ */
     font-size: 18px; 
     color: #b80050;
-    font-weight: 700; /* Dùng font-weight 700 (bold) */
+    font-weight: 700; 
     text-shadow: 0 0 6px rgba(255,105,180,0.6);
     opacity: 0;
     transition: opacity 1s ease-in;
@@ -174,7 +171,6 @@ body.fade-in {
 #card h1 {
     color: #b80050;
     font-family: 'Playfair Display', serif;
-    /* CẬP NHẬT: Thêm text-shadow cho tiêu đề mềm mại hơn */
     text-shadow: 1px 1px 5px rgba(255,192,203, 0.5); 
     font-size: 38px;
     margin: 10px 0 15px 0;
@@ -205,19 +201,20 @@ body.fade-in {
     to { opacity: 1; transform: scale(1); }
 }
 
+/* ĐÃ CẬP NHẬT: Thay đổi font cho nội dung lời chúc */
 #card p {
-    /* CẬP NHẬT: Tăng font-size nhẹ */
     font-size: 17px; 
     color: #333;
     line-height: 1.7;
     width: 90%;
     margin: 0 auto;
     text-align: left;
+    font-family: 'Merriweather', serif; /* FONT MỚI */
 }
 #card p strong { 
-    /* CẬP NHẬT: Đổi màu đậm hơn cho sự sang trọng */
     color: #b80050; 
-    font-weight: 700; /* Đảm bảo độ đậm */
+    font-weight: 700; 
+    font-family: 'Merriweather', serif; /* Đảm bảo strong cũng dùng Merriweather */
 }
 
 .line { 
@@ -230,13 +227,11 @@ body.fade-in {
 .signature {
     margin-top: 25px;
     font-family: 'Playfair Display', serif;
-    /* CẬP NHẬT: Tăng font-size */
     font-size: 24px; 
     color: #b80050;
     animation: textGlow 2s infinite alternate ease-in-out;
 }
 @keyframes textGlow {
-    /* CẬP NHẬT: Điều chỉnh text-shadow nổi bật hơn */
     0% { text-shadow: 0 0 8px rgba(255, 105, 180, 0.7); }
     100% { text-shadow: 0 0 15px rgba(255, 51, 133, 0.9), 0 0 30px rgba(255, 150, 200, 0.5); }
 }
@@ -370,7 +365,9 @@ body.fade-in {
     #card { padding: 25px 15px; width: 95%; border-width: 8px; }
     /* CẬP NHẬT: Kích thước chữ nhỏ hơn cho mobile */
     #card h1 { font-size: 32px; } 
-    #card p { font-size: 15px; }
+    #card p { 
+        font-size: 15px; /* Giảm kích thước chữ nội dung */
+    }
     #card p strong { font-weight: 700; }
     .signature { font-size: 20px; }
     .card-gif { width: 100px; }
