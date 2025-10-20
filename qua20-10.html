@@ -5,20 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <title>💖 Món quà 20/10 💐</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
 <style>
+/* CĂN CHỈNH CHO MOBILE/ANDROID */
+html {
+    /* Đảm bảo chiều cao đầy đủ cho root */
+    height: 100%;
+}
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    /* Dùng min-height 100% thay vì 100vh để tránh lỗi thanh địa chỉ trên mobile */
+    min-height: 100vh;
+    height: 100%; /* Đã thay đổi */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
-    /* Giữ Quicksand là font mặc định cho Body và Input/Button */
     font-family: 'Quicksand', sans-serif; 
     font-weight: 400; 
     text-align: center;
-    overflow: hidden;
+    overflow-x: hidden; /* Tránh thanh cuộn ngang */
     position: relative;
     perspective: 1000px;
     transition: opacity 700ms ease-in, transform 700ms ease-in;
@@ -201,7 +207,6 @@ body.fade-in {
     to { opacity: 1; transform: scale(1); }
 }
 
-/* ĐÃ CẬP NHẬT: Thay đổi font cho nội dung lời chúc */
 #card p {
     font-size: 17px; 
     color: #333;
@@ -209,12 +214,12 @@ body.fade-in {
     width: 90%;
     margin: 0 auto;
     text-align: left;
-    font-family: 'Merriweather', serif; /* FONT MỚI */
+    font-family: 'Merriweather', serif; 
 }
 #card p strong { 
     color: #b80050; 
     font-weight: 700; 
-    font-family: 'Merriweather', serif; /* Đảm bảo strong cũng dùng Merriweather */
+    font-family: 'Merriweather', serif; 
 }
 
 .line { 
@@ -254,32 +259,8 @@ body.fade-in {
 #deco-bl{bottom:10px;left:10px;}
 #deco-br{bottom:10px;right:10px;}
 
-/* HIỆU ỨNG CONFETTI (Lấp lánh) */
-.confetti-piece {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #ffc0cb;
-    opacity: 0;
-    border-radius: 50%;
-    animation: fall 3s infinite;
-    pointer-events: none;
-    z-index: 100;
-    will-change: transform, opacity; 
-}
-.confetti-piece:nth-child(even) { background: #ffe5b4; }
-.confetti-piece:nth-child(3n) {
-    background: #b0e0e6;
-    width: 5px;
-    height: 15px;
-    border-radius: 2px;
-}
-@keyframes fall {
-    0% { transform: translate3d(0, -100px, 0) rotate(0deg); opacity: 1; }
-    100% { transform: translate3d(0, 100vh, 0) rotate(720deg); opacity: 0.5; }
-}
 
-/* HIỆU ỨNG TRÁI TIM RƠI TỪ TRÊN XUỐNG (Nền) */
+/* CHỈ GIỮ LẠI: HIỆU ỨNG TRÁI TIM RƠI TỪ TRÊN XUỐNG (Nền) */
 .heart-fall {
     position: absolute;
     font-size: 25px;
@@ -340,33 +321,12 @@ body.fade-in {
     }
 }
 
-/* HIỆU ỨNG LẤP LÁNH CHO THIỆP */
-.card-sparkle {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background-color: #ffd700;
-    border-radius: 50%;
-    opacity: 0;
-    pointer-events: none;
-    animation: sparkleFadeOut 2s ease-out forwards;
-    box-shadow: 0 0 5px #ffd700, 0 0 10px #ffcc00;
-    will-change: transform, opacity;
-}
-
-@keyframes sparkleFadeOut {
-    0% { transform: scale(0.5); opacity: 1; }
-    100% { transform: scale(1.5); opacity: 0; }
-}
-
-
 /* Mobile */
 @media (max-width:600px) {
     #card { padding: 25px 15px; width: 95%; border-width: 8px; }
-    /* CẬP NHẬT: Kích thước chữ nhỏ hơn cho mobile */
     #card h1 { font-size: 32px; } 
     #card p { 
-        font-size: 15px; /* Giảm kích thước chữ nội dung */
+        font-size: 15px; 
     }
     #card p strong { font-weight: 700; }
     .signature { font-size: 20px; }
@@ -497,28 +457,9 @@ function createClickHeart(x, y) {
     heart.addEventListener('animationend', () => heart.remove());
 }
 
-// Lấp lánh trên thiệp
-function createCardSparkles() {
-    const numSparkles = 15; 
-    const cardRect = card.getBoundingClientRect();
-    for (let i = 0; i < numSparkles; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.classList.add('card-sparkle');
-        const randX = Math.random() * (cardRect.width + 100) - 50; 
-        const randY = Math.random() * (cardRect.height + 100) - 50;
-        sparkle.style.left = `${cardRect.left + randX}px`;
-        sparkle.style.top = `${cardRect.top + randY}px`;
-        sparkle.style.animationDelay = `${Math.random() * 0.8}s`; 
-        document.body.appendChild(sparkle);
-        sparkle.addEventListener('animationend', () => sparkle.remove());
-    }
-}
-
 // Tối ưu hóa: Hàm Rung (Haptic Feedback) cho di động
 function triggerHapticFeedback() {
-    // Kiểm tra xem trình duyệt có hỗ trợ API rung không
     if (navigator.vibrate) {
-        // Rung nhẹ 50ms
         navigator.vibrate(50); 
     }
 }
@@ -533,7 +474,6 @@ function handleStartButtonClick(event) {
         return;
     }
     
-    // THAY ĐỔI: Thêm Rung khi nhấn nút
     triggerHapticFeedback(); 
 
     // Hiệu ứng trái tim
@@ -562,8 +502,6 @@ function handleStartButtonClick(event) {
 
 // Hiển thị thiệp và gõ chữ
 async function showCardContent() {
-    createCardSparkles();
-    setTimeout(createConfetti, 500);
     for (const line of lines) {
         const htmlText = line.getAttribute('data-text').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         await typeLine(line, htmlText); 
@@ -584,36 +522,20 @@ document.addEventListener('click', e => {
     }
 });
 
-// THAY ĐỔI: Tối ưu hóa Touch Event (Chạm)
+// Tối ưu hóa Touch Event (Chạm)
 document.addEventListener('touchstart', e => {
-    // THAY ĐỔI: Thêm rung nhẹ khi chạm vào nền
     if (e.target !== startBtn && e.target !== giftBox && e.target !== recipientNameInput) {
         triggerHapticFeedback(); 
     }
     
     const now = Date.now();
     if (e.target !== startBtn && e.target !== giftBox && e.target !== recipientNameInput && now - lastClickTime > clickThrottle) {
-        // Sử dụng touch event đầu tiên cho vị trí
         createClickHeart(e.touches[0].clientX, e.touches[0].clientY);
         lastClickTime = now;
     }
-}, { passive: true }); // THAY ĐỔI: Dùng passive: true để cuộn mượt hơn
+}, { passive: true }); 
 
-// Tối ưu hóa Confetti: Giảm số lượng
-function createConfetti() {
-    for (let i = 0; i < 15; i++) {
-        const piece = document.createElement('div');
-        piece.classList.add('confetti-piece');
-        piece.style.left = `${Math.random() * 100}vw`;
-        piece.style.width = `${5 + Math.random() * 10}px`;
-        piece.style.height = `${5 + Math.random() * 15}px`;
-        piece.style.animationDelay = `${-Math.random() * 4}s`;
-        piece.style.animationDuration = `${3 + Math.random() * 2}s`;
-        document.body.appendChild(piece);
-    }
-}
-
-// Tối ưu hóa Heart Rain: Tạo số lượng cố định, không cần setInterval
+// Heart Rain: Tạo số lượng cố định
 function createInitialHearts(count) {
     for(let i = 0; i < count; i++) {
         const heart = document.createElement('span');
@@ -641,7 +563,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 giftBox.addEventListener('click', () => {
-    // THAY ĐỔI: Thêm rung nhẹ khi mở quà
     triggerHapticFeedback(); 
     
     note.style.display = "none";
