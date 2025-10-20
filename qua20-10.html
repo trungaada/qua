@@ -2,13 +2,14 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <title>💖 Món quà 20/10 💐</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+<title>💖 Món quà 20/10 💐</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 <style>
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 100vh; /* Giữ cố định chiều cao màn hình */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,13 +17,12 @@ body {
     background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
     font-family: 'Quicksand', sans-serif;
     text-align: center;
-    overflow: hidden;
+    overflow: hidden; /* QUAN TRỌNG: Ngăn cuộn trang */
     position: relative;
     perspective: 1000px;
     transition: opacity 700ms ease-in, transform 700ms ease-in;
     opacity: 0;
     transform: scale(0.95);
-    /* THAY ĐỔI: Tăng tốc độ render cho body */
     will-change: opacity, transform; 
 }
 body.fade-in {
@@ -81,7 +81,7 @@ body.fade-in {
     font-family: 'Quicksand', sans-serif;
     box-shadow: 0 0 15px rgba(255,105,180,0.7);
     animation: pinkPulse 1.5s infinite alternate ease-in-out,
-                 softShake 4s infinite ease-in-out;
+                softShake 4s infinite ease-in-out;
     transition: all 0.3s ease;
 }
 #name-input-container button:hover {
@@ -142,7 +142,7 @@ body.fade-in {
     opacity: 1;
 }
 
-/* 💌 THIỆP */
+/* 💌 THIỆP (ĐÃ CHỈNH RỘNG HƠN) */
 #card {
     display: none;
     background: #fffafc;
@@ -150,8 +150,8 @@ body.fade-in {
     border: 10px solid #f8bbd0;
     box-shadow: 0 0 25px rgba(255,105,180,0.4);
     padding: 35px 25px;
-    width: 80%;
-    max-width: 550px;
+    width: 90%; /* Tăng độ rộng trên mobile */
+    max-width: 650px; /* ĐÃ TĂNG: Thiệp rộng hơn trên desktop/tablet */
     text-align: center;
     opacity: 0;
     transform: scale(0.9) rotateY(30deg);
@@ -168,14 +168,15 @@ body.fade-in {
     to { transform: translateY(0) scale(1) rotateY(0deg); opacity: 1; }
 }
 
+/* ĐÃ TĂNG CỠ CHỮ TIÊU ĐỀ */
 #card h1 {
     color: #b80050;
     font-family: 'Playfair Display', serif;
-    font-size: 38px;
+    font-size: 42px; /* ĐÃ TĂNG */
     margin: 10px 0 15px 0;
 }
 
-/* 🌟 GIF DỄ THƯƠNG (Cập nhật: Viền mềm mại hơn) */
+/* 🌟 GIF DỄ THƯƠNG */
 .gif-container {
     display: flex;
     justify-content: center;
@@ -186,7 +187,6 @@ body.fade-in {
 .card-gif {
     width: 120px;
     height: auto;
-    /* THAY ĐỔI: Tăng độ bo tròn và thêm viền hồng nhẹ */
     border-radius: 25px;
     border: 3px solid #ffc0cb; 
     box-shadow: 0 0 15px rgba(255,105,180,0.6);
@@ -201,24 +201,27 @@ body.fade-in {
     to { opacity: 1; transform: scale(1); }
 }
 
+/* ✨ THAY ĐỔI: CSS CHỮ VIẾT TAY CHO NỘI DUNG THIỆP (ĐÃ TĂNG CỠ CHỮ) */
 #card p {
-    font-size: 16px;
+    font-size: 21px; /* ĐÃ TĂNG CỠ CHỮ */
     color: #333;
-    line-height: 1.7;
+    line-height: 1.8;
     width: 90%;
     margin: 0 auto;
-    text-align: left; /* Căn lề trái cho dễ đọc */
+    text-align: left; 
+    font-family: 'Dancing Script', cursive; 
+    font-weight: 700;
+    text-shadow: 0 0 1px rgba(0,0,0,0.1); 
 }
 #card p strong { color: #ff3385; }
 
-/* THAY ĐỔI: Dùng CSS cơ bản cho dòng chữ thay vì animation lineUp */
 .line { 
     display: block; 
-    margin-bottom: 12px; 
-    min-height: 18px; /* Giữ khoảng cách khi chưa có nội dung */
+    margin-bottom: 15px; /* Giãn dòng */
+    min-height: 25px; /* Giữ khoảng cách khi chưa có nội dung */
 }
 
-/* ✨ THÊM HIỆU ỨNG TEXT GLOW CHO CHỮ KÝ */
+/* ✨ HIỆU ỨNG TEXT GLOW CHO CHỮ KÝ */
 .signature {
     margin-top: 25px;
     font-family: 'Playfair Display', serif;
@@ -249,7 +252,7 @@ body.fade-in {
 #deco-bl{bottom:10px;left:10px;}
 #deco-br{bottom:10px;right:10px;}
 
-/* 🎊 HIỆU ỨNG CONFETTI (Lấp lánh) 🎊 */
+/* 🎊 HIỆU ỨNG CONFETTI */
 .confetti-piece {
     position: absolute;
     width: 10px;
@@ -260,7 +263,6 @@ body.fade-in {
     animation: fall 3s infinite;
     pointer-events: none;
     z-index: 100;
-    /* THAY ĐỔI: Thêm will-change */
     will-change: transform, opacity; 
 }
 .confetti-piece:nth-child(even) { background: #ffe5b4; }
@@ -275,7 +277,7 @@ body.fade-in {
     100% { transform: translate3d(0, 100vh, 0) rotate(720deg); opacity: 0.5; }
 }
 
-/* ❤️ HIỆU ỨNG TRÁI TIM RƠI TỪ TRÊN XUỐNG (Nền) - TỐI ƯU HÓA GPU ❤️ */
+/* ❤️ HIỆU ỨNG TRÁI TIM RƠI */
 .heart-fall {
     position: absolute;
     font-size: 25px;
@@ -285,12 +287,10 @@ body.fade-in {
     pointer-events: none;
     z-index: 0;
     text-shadow: 0 0 5px rgba(255,51,133,0.5);
-    /* THAY ĐỔI: Thêm will-change */
     will-change: transform, opacity; 
 }
 
 @keyframes heartFall {
-    /* Đảm bảo dùng translate3d để buộc trình duyệt dùng GPU */
     0% {
         transform: translate3d(var(--x, 0px), -10vh, 0) scale(0.5);
         opacity: 0;
@@ -304,7 +304,7 @@ body.fade-in {
     }
 }
 
-/* 💥 HIỆU ỨNG TRÁI TIM BẬT LÊN KHI CLICK (ĐA MÀU) 💥 */
+/* 💥 HIỆU ỨNG TRÁI TIM BẬT LÊN KHI CLICK */
 .click-heart {
     position: fixed; 
     font-size: 30px;
@@ -313,11 +313,9 @@ body.fade-in {
     z-index: 101; 
     user-select: none;
     transform: translate(-50%, -50%); 
-    /* THAY ĐỔI: Thêm will-change */
     will-change: transform, opacity;
 }
 
-/* Định nghĩa màu sắc cho trái tim click */
 .click-heart.pink { color: #ff1493; text-shadow: 0 0 8px rgba(255,20,147,0.7); }
 .click-heart.red { color: #e91e63; text-shadow: 0 0 8px rgba(233,30,99,0.7); }
 .click-heart.purple { color: #9c27b0; text-shadow: 0 0 8px rgba(156,39,176,0.7); }
@@ -330,21 +328,35 @@ body.fade-in {
         opacity: 1;
     }
     50% {
-        /* THAY ĐỔI: Dùng translate3d */
         transform: translate3d(-50%, -100%, 0) scale(1.2); 
         opacity: 0.9;
     }
     100% {
-        /* THAY ĐỔI: Dùng translate3d */
         transform: translate3d(-50%, -200%, 0) scale(0.8);
         opacity: 0;
     }
 }
 
-/* ✨ HIỆU ỨNG LẤP LÁNH CHO THIỆP ✨ */
+/* ✨ HIỆU ỨNG LẤP LÁNH CHO THIỆP */
+/* CSS cho lấp lánh thiệp (cần thêm nếu muốn) */
+.card-sparkle {
+    position: fixed; 
+    width: 6px;
+    height: 6px;
+    background-color: #ffd700;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #ffd700;
+    opacity: 0;
+    animation: sparkleEffect 1.5s ease-out forwards;
+    pointer-events: none;
+    z-index: 102;
+}
 
-
-
+@keyframes sparkleEffect {
+    0% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.5); }
+    100% { opacity: 0; transform: scale(0.8); }
+}
 
 </style>
 </head>
@@ -400,6 +412,8 @@ body.fade-in {
 const giftBox = document.getElementById('gift-box');
 const card = document.getElementById('card');
 const note = document.getElementById('note');
+// Lấy thẻ <p> làm mục tiêu cuộn
+const cardContentContainer = document.querySelector('#card p');
 const lines = Array.from(document.querySelectorAll('.line')).filter(el => el.hasAttribute('data-text'));
 const nameInputContainer = document.getElementById('name-input-container');
 const recipientNameInput = document.getElementById('recipient-name');
@@ -470,7 +484,7 @@ function createClickHeart(x, y) {
     heart.addEventListener('animationend', () => heart.remove());
 }
 
-// Lấp lánh trên thiệp
+// Lấp lánh trên thiệp (cần thêm CSS cho .card-sparkle nếu chưa có)
 function createCardSparkles() {
     const numSparkles = 15; 
     const cardRect = card.getBoundingClientRect();
@@ -489,9 +503,7 @@ function createCardSparkles() {
 
 // Tối ưu hóa: Hàm Rung (Haptic Feedback) cho di động
 function triggerHapticFeedback() {
-    // Kiểm tra xem trình duyệt có hỗ trợ API rung không
     if (navigator.vibrate) {
-        // Rung nhẹ 50ms
         navigator.vibrate(50); 
     }
 }
@@ -501,12 +513,12 @@ function handleStartButtonClick(event) {
     const name = recipientNameInput.value.trim().replace(/[<>]/g, "");
     if (!name) {
         alert("Vui lòng nhập tên người nhận! 💖");
-        if (event.clientX && event.clientY) createClickHeart(event.clientX, event.clientY);
-        else if (event.touches) createClickHeart(event.touches[0].clientX, event.touches[0].clientY);
+        const x = event.clientX || (event.touches ? event.touches[0].clientX : 0);
+        const y = event.clientY || (event.touches ? event.touches[0].clientY : 0);
+        if (x && y) createClickHeart(x, y);
         return;
     }
     
-    // THAY ĐỔI: Thêm Rung khi nhấn nút
     triggerHapticFeedback(); 
 
     // Hiệu ứng trái tim
@@ -533,20 +545,28 @@ function handleStartButtonClick(event) {
     }, 500);
 }
 
-// Hiển thị thiệp và gõ chữ
+// HIỂN THỊ THIỆP VÀ GÕ CHỮ (ĐÃ XÓA HIỆU ỨNG CUỘN)
 async function showCardContent() {
     createCardSparkles();
     setTimeout(createConfetti, 500);
+
+    // Đảm bảo body vẫn căn giữa và KHÔNG CUỘN
+    document.body.style.justifyContent = 'center'; 
+    document.body.style.alignItems = 'center';
+    document.body.style.overflow = 'hidden'; 
+    
     for (const line of lines) {
         const htmlText = line.getAttribute('data-text').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         await typeLine(line, htmlText); 
-        await new Promise(resolve => setTimeout(resolve, 600));
+        
+        // **KHÔNG CÓ CUỘN**
+        
+        await new Promise(resolve => setTimeout(resolve, 600)); // Nghỉ 0.6s giữa các dòng
     }
 }
 
 startBtn.addEventListener('click', handleStartButtonClick);
 startBtn.addEventListener('touchstart', handleStartButtonClick);
-
 
 // Tối ưu hóa: Thêm Throttle (giới hạn tốc độ) cho hiệu ứng trái tim click
 document.addEventListener('click', e => {
@@ -557,22 +577,20 @@ document.addEventListener('click', e => {
     }
 });
 
-// THAY ĐỔI: Tối ưu hóa Touch Event (Chạm)
+// Tối ưu hóa Touch Event (Chạm)
 document.addEventListener('touchstart', e => {
-    // THAY ĐỔI: Thêm rung nhẹ khi chạm vào nền
     if (e.target !== startBtn && e.target !== giftBox && e.target !== recipientNameInput) {
         triggerHapticFeedback(); 
     }
     
     const now = Date.now();
     if (e.target !== startBtn && e.target !== giftBox && e.target !== recipientNameInput && now - lastClickTime > clickThrottle) {
-        // Sử dụng touch event đầu tiên cho vị trí
         createClickHeart(e.touches[0].clientX, e.touches[0].clientY);
         lastClickTime = now;
     }
-}, { passive: true }); // THAY ĐỔI: Dùng passive: true để cuộn mượt hơn
+}, { passive: true }); 
 
-// Tối ưu hóa Confetti: Giảm số lượng
+// Tối ưu hóa Confetti
 function createConfetti() {
     for (let i = 0; i < 15; i++) {
         const piece = document.createElement('div');
@@ -586,7 +604,7 @@ function createConfetti() {
     }
 }
 
-// Tối ưu hóa Heart Rain: Tạo số lượng cố định, không cần setInterval
+// Tối ưu hóa Heart Rain
 function createInitialHearts(count) {
     for(let i = 0; i < count; i++) {
         const heart = document.createElement('span');
@@ -614,7 +632,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 giftBox.addEventListener('click', () => {
-    // THAY ĐỔI: Thêm rung nhẹ khi mở quà
     triggerHapticFeedback(); 
     
     note.style.display = "none";
@@ -624,7 +641,7 @@ giftBox.addEventListener('click', () => {
     setTimeout(() => {
         giftBox.style.display = "none";
         card.classList.add("show");
-        showCardContent();
+        showCardContent(); // Bắt đầu hiệu ứng gõ chữ và KHÔNG CUỘN
     }, 800);
 });
 </script>
